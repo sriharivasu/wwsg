@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="astronomy.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="astronomy.js"></script>
+</head>
+
+<body>
+
+    <div class="main" id="main">
+        <div class="header" id="header">
+            <button class="opennav" id="openNav" onclick="w3_open()">
+                <span class="material-symbols-outlined"> menu </span>
+            </button>
+            <h1>Astronomy</h1>
+        </div>
+        <div class="text">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <h2>Definition</h2>
+            <p>Astronomy is the scientific study of celestial objects, space, and the universe as a whole. It involves
+                observing and analyzing phenomena such as stars, planets, galaxies, and cosmic events to understand their
+                properties, behaviors, and origins.</p>
+            <h2>Branches</h2>
+            <div class="flowchart">
+                <div class="tree-container">
+                    <div class="tree">  
+                
+                        <!-- Generation 1: Great-Great-Grandparents -->
+                        <div class="generation gen-1">
+                            <div class="generation-label">Gen 1</div>
+                            <div class="person has-children" onclick="showChildren('gen-2')">
+                                <h3>Astronomy</h3>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 2: Great-Grandparents -->
+                        <div class="generation gen-2 hidden">
+                            <div class="generation-label">Gen 2</div>
+                            <div class="person has-children" onclick="showChildren('gen-3-robert')">
+                                <h3>Aeronautics</h3>
+                                <div class = "click-hint">Click</div>
+                            </div>
+                            <div class="person has-children" onclick="showChildren('gen-3-james')">
+                                <h3>Astrophysics</h3>
+                                <div class="click-hint">Click</div>
+                            </div>
+                            <div class="person has-children" onclick="showChildren('gen-3-jack')">
+                                <h3>Cosmology</h3>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 3: Grandparents - Robert's children -->
+                        <div class="generation gen-3-robert hidden">
+                            <div class="generation-label">Gen 3</div>
+                            <div class="person">
+                                <h3>Aerodynamics</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Astrodynamics</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Aviation</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Flow Control</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Composite Material</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Composite Material</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Aircraft Structures</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Navigational and Guidance Control Systems</h3>
+                            </div>
+                            <div class="person">
+                                <h3>Propulsion</h3>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 3: Grandparents - James's children -->
+                        <div class="generation gen-3-james hidden">
+                            <div class="generation-label">Gen 3</div>
+                            <div class="person has-children" onclick="showChildren('gen-4-michael')">
+                                <h3>Michael Brown</h3>
+                                <p>1950-2015</p>
+                                <p>Lawyer</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                            <div class="person has-children" onclick="showChildren('gen-4-thomas')">
+                                <h3>Thomas Green</h3>
+                                <p>1947</p>
+                                <p>Carpenter</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+
+                        <div class="generation gen-3-jack hidden">
+                            <div class="generation-label">Gen 3</div>
+                            <div class="person has-children" onclick="showChildren('gen-4-michael')">
+                                <h3>Michael Brown</h3>
+                                <p>1950-2015</p>
+                                <p>Lawyer</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                            <div class="person has-children" onclick="showChildren('gen-4-thomas')">
+                                <h3>Thomas Green</h3>
+                                <p>1947</p>
+                                <p>Carpenter</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 4: Parents - David's children -->
+                        <div class="generation gen-4-david hidden">
+                            <div class="generation-label">Gen 4</div>
+                            <div class="person has-children" onclick="showChildren('gen-5-john')">
+                                <h3>John Smith</h3>
+                                <p>1975</p>
+                                <p>Software Engineer</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                            <div class="person has-children" onclick="showChildren('gen-5-sarah')">
+                                <h3>Sarah Smith</h3>
+                                <p>1978</p>
+                                <p>Marketing Manager</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 4: Parents - Linda's children -->
+                        <div class="generation gen-4-linda hidden">
+                            <div class="generation-label">Gen 4</div>
+                            <div class="person has-children" onclick="showChildren('gen-5-mark')">
+                                <h3>Mark Wilson</h3>
+                                <p>1973</p>
+                                <p>Architect</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 4: Parents - Michael's children -->
+                        <div class="generation gen-4-michael hidden">
+                            <div class="generation-label">Gen 4</div>
+                            <div class="person has-children" onclick="showChildren('gen-5-jennifer')">
+                                <h3>Jennifer Brown</h3>
+                                <p>1976</p>
+                                <p>Veterinarian</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 4: Parents - Thomas's children -->
+                        <div class="generation gen-4-thomas hidden">
+                            <div class="generation-label">Gen 4</div>
+                            <div class="person has-children" onclick="showChildren('gen-5-kevin')">
+                                <h3>Kevin Green</h3>
+                                <p>1980</p>
+                                <p>Teacher</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                            <div class="person has-children" onclick="showChildren('gen-5-ryan')">
+                                <h3>Ryan Green</h3>
+                                <p>1977</p>
+                                <p>Police Officer</p>
+                                <div class="click-hint">Click</div>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 5: Current Generation - John's children -->
+                        <div class="generation gen-5-john hidden">
+                            <div class="generation-label">Gen 5</div>
+                            <div class="person">
+                                <h3>Emma Smith</h3>
+                                <p>2005</p>
+                                <p>Student</p>
+                            </div>
+                            <div class="person">
+                                <h3>Noah Smith</h3>
+                                <p>2008</p>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 5: Current Generation - Sarah's children -->
+                        <div class="generation gen-5-sarah hidden">
+                            <div class="generation-label">Gen 5</div>
+                            <div class="person">
+                                <h3>Olivia Smith</h3>
+                                <p>2006</p>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 5: Current Generation - Mark's children -->
+                        <div class="generation gen-5-mark hidden">
+                            <div class="generation-label">Gen 5</div>
+                            <div class="person">
+                                <h3>Liam Wilson</h3>
+                                <p>2010</p>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 5: Current Generation - Jennifer's children -->
+                        <div class="generation gen-5-jennifer hidden">
+                            <div class="generation-label">Gen 5</div>
+                            <div class="person">
+                                <h3>Isabella Brown</h3>
+                                <p>2007</p>
+                                <p>Student</p>
+                            </div>
+                            <div class="person">
+                                <h3>Mason Brown</h3>
+                                <p>2009</p>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 5: Current Generation - Kevin's children -->
+                        <div class="generation gen-5-kevin hidden">
+                            <div class="generation-label">Gen 5</div>
+                            <div class="person">
+                                <h3>Sophia Green</h3>
+                                <p>2012</p>
+                                <p>Student</p>
+                            </div>
+                            <div class="person">
+                                <h3>Lucas Green</h3>
+                                <p>2015</p>
+                                <p>Preschooler</p>
+                            </div>
+                        </div>
+                
+                        <!-- Generation 5: Current Generation - Ryan's children -->
+                        <div class="generation gen-5-ryan hidden">
+                            <div class="generation-label">Gen 5</div>
+                            <div class="person">
+                                <h3>Ava Green</h3>
+                                <p>2013</p>
+                                <p>Elementary</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p></p>
+
+    </div>
+    <div class="sidebar" id="sidebar" style="width: 0; display: none;">
+        <div class="card-container">
+            <button class="collapse" id="collapse" onclick="w3_close()">
+                <h4>Close &times;</h4>
+            </button>
+            <a class="card" href="home.html">
+                <h3>Home</h3>
+                <p>About us.</p>
+            </a>
+
+            <div class="astronomys">
+                <h3>Astronomy</h3>
+                <p>The study of celestial objects and phenomena beyond Earth's atmosphere.</p>
+            </div>
+
+
+            <a class="card" href="/projects/gamma">
+                <h3>Biology</h3>
+                <p>The study of living organisms, their structure, function, growth, and evolution, providing insights
+                    into the diversity of life on Earth.</p>
+            </a>
+
+            <a class="card" href="/projects/gamma">
+                <h3>Chemistry</h3>
+                <p>The science of atomic matter, especially its chemical reactions, but also including its properties,
+                    structure,
+                    composition, behavior, and changes as they relate to the chemical reactions.</p>
+            </a>
+
+            <a class="card" href="/projects/gamma">
+                <h3>Computer Science</h3>
+                <p>The study of computation, information, and automation, encompassing both theoretical and practical
+                    aspects.</p>
+            </a>
+
+            <a class="card" href="/projects/gamma">
+                <h3>Engineering</h3>
+                <p>The application of science and mathematics to solve problems and create systems, structures, and
+                    technologies that
+                    improve efficiency and productivity.</p>
+            </a>
+
+            <br><br>
+        </div>
+
+    </div>
+</body>
+
+</html>
