@@ -27,6 +27,7 @@ function showChildren(targetId) {
     clickedButton.style.boxShadow = "0 8px 25px rgba(0, 123, 255, 0.2)";
     clickedButton.style.background = "rgb(232, 239, 255)"; // Light blue background for active button
     clickedButton.style.fontStyle = "oblique";
+    clickedButton.style.fontWeight = "bold";
     buttons.forEach(button => {
         if (button !== clickedButton) {
             button.style.filter = "opacity(90%) sepia(30%)";
