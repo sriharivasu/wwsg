@@ -7,8 +7,8 @@ body {
 .typewriter {
     font-size: 48px;
     font-weight: bold;
+    font-family: "Courier New";
     color: rgb(0, 204, 20);
-    font-family: "Trebuchet MS", sans-serif;
     text-shadow: 2px 2px 1px rgb(0, 0, 0);
     letter-spacing: 0.3rem;
 }
