@@ -1,11 +1,12 @@
 body {
-    background: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 
 }
 
 h1 {
     color: rgb(18, 18, 18);
+    
 }
 
 h1:hover {
@@ -13,11 +14,11 @@ h1:hover {
 }
 
 .header {
-    background-image: url("space.webp");
+    background-image: url("spaces.jpg");
     background-size: cover;
     background-position-x: center;
-    background-position-y: 20%;
-    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    background-position-y: 50%;
+    box-shadow: 0px 0px 10px rgb(48, 48, 48);
     top: 0;
     left: 0;
     width: 98.35%;
@@ -26,6 +27,7 @@ h1:hover {
     padding: 0px 150px;
     float: right;
     height: 30%;
+    user-select: none;
 }
 .cap {
     color: rgb(255, 255, 255);
@@ -64,6 +66,7 @@ h1:hover {
     position: absolute;
     top: 34%;
     left: 40%;
+    
 }
 
 .header {
@@ -74,8 +77,13 @@ h1:hover {
 
 .main {
     transition: margin-left 0.4s ease;
-    padding: 1rem;
     font-family: "Trebuchet MS", sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgb(255, 255, 255);
+    margin: 20px auto;
+    text-align: justify;
+    letter-spacing: 0.05rem;
 }
 
 
@@ -92,18 +100,16 @@ h1:hover {
     position: fixed;
     top: 0;
     left: 0;
-    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(240, 240, 240));
-    opacity: 1;
+    background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(15, 15, 15));
     overflow-x: hidden;
     white-space: nowrap;
     transition: width 0.4s ease;
     z-index: 1000;
     padding: 1rem;
-    box-shadow: 1px 0 10px rgb(0, 0, 0);
+    box-shadow: 1px 0 10px rgb(255, 255, 255);
     overflow: visible;
     white-space: normal;
     overflow-y: auto;
-    font-family: "Trebuchet MS";
 }
 
 /* Layout container */
@@ -123,28 +129,28 @@ h1:hover {
     display: flex;
     flex-direction: column;
     justify-content: none;
-    background-color: #ffffff;
-    border: 2px solid #ddd;
+    background-color: #000000;
+    border: 2px solid #232323;
     border-radius: 12px;
     padding: 1.25rem;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #cacaca;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.775);
     transition: all 0.2s ease-in-out;
 }
 
 /* Hover/active effects */
 .card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
-    border-color: teal;
+    box-shadow: 0 12px 20px rgba(255, 255, 255, 0.835);
+    border-color: rgba(0, 40, 40, 0.185);
 }
 
 /* Headings in cards */
 .card h3 {
     margin: 0 0 0.5rem;
     font-size: 1.25rem;
-    color: #006666;
+    color: #00b0b0;
     text-align: center;
 }
 
@@ -158,28 +164,28 @@ h1:hover {
     display: flex;
     flex-direction: column;
     justify-content: none;
-    background-color: rgb(234, 234, 234);
-    border: 2px solid #ddd;
+    background-color: rgb(21, 21, 21);
+    border: 2px solid #cfcfcf;
     border-radius: 12px;
     padding: 1.25rem;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #d5d5d5;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.838);
     transition: all 0.2s ease-in-out;
 }
 
 /* Hover/active effects */
 .astronomys:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
-    border-color: teal;
+    box-shadow: 0 12px 20px rgba(255, 255, 255, 0.855);
+    border-color: rgb(0, 188, 188);
 }
 
 /* Headings in cards */
 .astronomys h3 {
     margin: 0 0 0.5rem;
     font-size: 1.25rem;
-    color: #006666;
+    color: #009b9b;
     text-align: center;
 }
 
@@ -187,6 +193,32 @@ h1:hover {
 .astronomys p {
     font-size: 0.95rem;
     line-height: 1.4;
+}
+
+.collapse {
+    display: flex;
+    flex-direction: column;
+    justify-content: none;
+    background-color: #000000;
+    border: 2px solid #323232;
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: #d1d1d1;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.831);
+    transition: all 0.2s ease-in-out;
+}
+
+.collapse:hover {
+    transform: translateY(6px);
+    cursor: pointer;
+}
+
+.collapse h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: #00a9a9;
+    text-align: center;
 }
 * {
     margin: 0;
@@ -204,7 +236,7 @@ h1:hover {
     overflow-y: scroll;
     overflow: auto;
     width: 100%;
-    background: rgb(255, 255, 255);
+    background: rgb(0, 0, 0);
     margin: auto;
 
 }
@@ -234,8 +266,8 @@ h1:hover {
 }
 
 .person {
-    background: linear-gradient(145deg, #ffffff, #f8f9fa);
-    border: 2px solid #e0e6ed;
+    background: linear-gradient(145deg, #000000, #0f0f0f);
+    border: 3px solid #00cffd67;
     border-radius: 15px;
     padding: 15px 20px;
     min-width: 140px;
@@ -250,7 +282,7 @@ h1:hover {
 .person:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(145deg, #f8f9ff, #e8e9f0);
+    color: rgb(255, 255, 255);
 }
 
 .person.has-children {
@@ -259,31 +291,31 @@ h1:hover {
 }
 
 .person.has-children:hover {
-    background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+    color: rgb(255, 255, 255);
 }
 .active {
-    background-color: #007bff;
+    background-color: #ffffff;
     color: white;
     border-color: #0056b3;
     box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
 }
 
 .person h3 {
-    color: #2c3e50;
+    color: #78a2cb;
     font-size: 16px;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
 .person p {
-    color: #6c757d;
+    color: #ffffff;
     font-size: 12px;
     margin-bottom: 3px;
 }
 
 .person .click-hint {
-    color: #007bff;
-    font-size: 10px;
+    color: #00d9ff;
+    font-size: 12px;
     font-style: italic;
     margin-top: 5px;
 }
@@ -293,14 +325,15 @@ h1:hover {
     left: -120px;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgb(9, 9, 9);
     padding: 8px 15px;
     border-radius: 20px;
     font-weight: bold;
-    color: #333;
+    color: #78a2cb;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
 }
+
 .subtitle {
     font-family: "Trebuchet MS";
     text-align: center;
@@ -411,29 +444,4 @@ h1:hover {
         margin-bottom: 20px;
         transform: none;
     }
-}
-.collapse {
-    display: flex;
-    flex-direction: column;
-    justify-content: none;
-    background-color: #ffffff;
-    border: 2px solid #ddd;
-    border-radius: 12px;
-    padding: 1.25rem;
-    text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease-in-out;
-}
-
-.collapse:hover {
-    transform: translateY(6px);
-    cursor: pointer;
-}
-
-.collapse h4 {
-    margin: 0 0 0.5rem;
-    font-size: 1rem;
-    color: #004444;
-    text-align: center;
 }

@@ -24,15 +24,16 @@ function showChildren(targetId) {
 
     clickedButton.style.filter = "opacity(100%) sepia(0%)";
     clickedButton.style.borderColor = "#007bff";
-    clickedButton.style.boxShadow = "0 8px 25px rgba(0, 123, 255, 0.2)";
-    clickedButton.style.background = "rgb(232, 239, 255)"; // Light blue background for active button
+    clickedButton.style.boxShadow = "0 8px 25px rgba(0, 123, 255, 0.8)";
+    clickedButton.style.background = "rgb(0, 0, 0)"; // Light blue background for active button
     clickedButton.style.fontStyle = "oblique";
     clickedButton.style.fontWeight = "bold";
+
     buttons.forEach(button => {
         if (button !== clickedButton) {
             button.style.filter = "opacity(90%) sepia(30%)";
             button.style.border = "2px solid blue";
-            button.style.boxShadow = "0 0 10px rgba(0, 0, 255, 0.5)";
+            button.style.boxShadow = "0 0 10px rgba(0, 0, 255, 0.82)";
             button.style.fontStyle = "normal";
 
         }

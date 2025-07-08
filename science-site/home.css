@@ -41,7 +41,7 @@ h1:hover {
     background-image: url("blackhole.png");
     background-size: cover;
     background-position-x: center;
-    background-position-y: center;
+    background-position-y: 28%;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     top: 0;
     left: 0;
@@ -51,6 +51,7 @@ h1:hover {
     padding: 0px 150px;
     float: right;
     height: 30%;
+    user-select: none;
     
 
 }
@@ -134,13 +135,13 @@ h1:hover {
     position: fixed;
     top: 0;
     left: 0;
-    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(240, 240, 240));
+    background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(15, 15, 15));
     overflow-x: hidden;
     white-space: nowrap;
     transition: width 0.4s ease;
     z-index: 1000;
     padding: 1rem;
-    box-shadow: 1px 0 10px rgb(0, 0, 0);
+    box-shadow: 1px 0 10px rgb(255, 255, 255);
     overflow: visible;
     white-space: normal;
     overflow-y: auto;
@@ -162,28 +163,28 @@ h1:hover {
     display: flex;
     flex-direction: column;
     justify-content: none;
-    background-color: #ffffff;
-    border: 2px solid #ddd;
+    background-color: #000000;
+    border: 2px solid #232323;
     border-radius: 12px;
     padding: 1.25rem;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #cacaca;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.775);
     transition: all 0.2s ease-in-out;
 }
 
 /* Hover/active effects */
 .card:hover{
     transform: translateY(-6px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
-    border-color: teal;
+    box-shadow: 0 12px 20px rgba(255, 255, 255, 0.835);
+    border-color: rgba(0, 40, 40, 0.185);
 }
 
 /* Headings in cards */
 .card h3 {
     margin: 0 0 0.5rem;
     font-size: 1.25rem;
-    color: #006666;
+    color: #00b0b0;
     text-align: center;
 }
 
@@ -197,28 +198,28 @@ h1:hover {
     display: flex;
     flex-direction: column;
     justify-content: none;
-    background-color: rgb(234, 234, 234);
-    border: 2px solid #ddd;
+    background-color: rgb(21, 21, 21);
+    border: 2px solid #cfcfcf;
     border-radius: 12px;
     padding: 1.25rem;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #d5d5d5;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.838);
     transition: all 0.2s ease-in-out;
 }
 
 /* Hover/active effects */
 .homes:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
-    border-color: teal;
+    box-shadow: 0 12px 20px rgba(255, 255, 255, 0.855);
+    border-color: rgb(0, 188, 188);
 }
 
 /* Headings in cards */
 .homes h3 {
     margin: 0 0 0.5rem;
     font-size: 1.25rem;
-    color: #006666;
+    color: #009b9b;
     text-align: center;
 }
 
@@ -232,13 +233,13 @@ h1:hover {
     display: flex;
     flex-direction: column;
     justify-content: none;
-    background-color: #ffffff;
-    border: 2px solid #ddd;
+    background-color: #000000;
+    border: 2px solid #323232;
     border-radius: 12px;
     padding: 1.25rem;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    color: #d1d1d1;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.831);
     transition: all 0.2s ease-in-out;
 }
 .collapse:hover {
@@ -248,7 +249,7 @@ h1:hover {
 .collapse h4 {
     margin: 0 0 0.5rem;
     font-size: 1rem;
-    color: #004444;
+    color: #00a9a9;
     text-align: center;
 }
 
