@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const words = ["Astronomers", "Biologists", "Engineers", "Historians", "Programmers", "Physicists", "You."];
     let currentWordIndex = 0;

@@ -138,6 +138,7 @@ h1:hover {
     color: #cacaca;
     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.775);
     transition: all 0.2s ease-in-out;
+    font-family: "Trebuchet MS", sans-serif;
 }
 
 /* Hover/active effects */
@@ -173,6 +174,7 @@ h1:hover {
     color: #d5d5d5;
     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.838);
     transition: all 0.2s ease-in-out;
+    font-family: "Trebuchet MS", sans-serif;
 }
 
 /* Hover/active effects */
