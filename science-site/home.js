@@ -2,7 +2,7 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const words = ["Astronomers", "Biologists", "Engineers", "Historians", "Programmers", "Physicists", "You."];
+    const words = ["Astronomers", "Biologists", "Engineers", "Historians", "Mathematicians", "Programmers", "Physicists", "You."];
     let currentWordIndex = 0;
     let currentCharIndex = 0;
     let isDeleting = false;
