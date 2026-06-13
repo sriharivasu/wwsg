@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tree of Science — A Field Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #11161d;
+    --bg-soft: #151b23;
+    --bg-card: #1b2330;
+    --paper: #f1ece1;
+    --paper-dim: #c9c3b6;
+    --muted: #8b96a8;
+    --muted-dim: #5e6878;
+    --line: #2b3340;
+    --line-soft: #1f2733;
+
+    --accent-natural: #93b67c;
+    --accent-formal:  #8c9ee0;
+    --accent-social:  #d39bc0;
+    --accent-applied: #e0b15f;
+    --accent-health:  #e08a73;
+    --accent-inter:   #6fc2bd;
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --radius: 10px;
+    --container: 880px;
+  }
+
+  /* ============ RESET / BASE ============ */
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--paper);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+
+  /* subtle background texture: faint grid, like graph paper for a field notebook */
+  body{
+    background-image:
+      linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%),
+      repeating-linear-gradient(0deg, var(--line-soft) 0 1px, transparent 1px 96px),
+      repeating-linear-gradient(90deg, var(--line-soft) 0 1px, transparent 1px 96px);
+    background-attachment: fixed;
+  }
+
+  .wrap{
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position: relative;
+    padding-bottom: 36px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-glyph{
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    width: 92px;
+    height: 92px;
+    color: var(--muted-dim);
+    opacity: 0.9;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    align-items: baseline;
+  }
+  .eyebrow .stat-num{ color: var(--paper-dim); font-weight: 600; }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    max-width: 14ch;
+    letter-spacing: -0.01em;
+  }
+  .hero .lede{
+    font-size: 1.05rem;
+    color: var(--paper-dim);
+    max-width: 62ch;
+    margin: 0 0 8px;
+  }
+  .hero .lede em{
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--paper);
+  }
+  .hero .note{
+    font-size: 0.88rem;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  /* ============ CONTROLS ============ */
+  .controls{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin: 28px 0 18px;
+  }
+  .search-wrap{
+    position: relative;
+    flex: 1 1 280px;
+    min-width: 220px;
+  }
+  .search-wrap input{
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 11px 14px;
+    outline: none;
+  }
+  .search-wrap input::placeholder{ color: var(--muted-dim); }
+  .search-wrap input:focus-visible{
+    border-color: var(--paper-dim);
+    box-shadow: 0 0 0 3px rgba(241,236,225,0.08);
+  }
+  .search-count{
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .btn-group{ display:flex; gap:8px; }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--paper-dim);
+    border-radius: var(--radius);
+    padding: 11px 16px;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease, background-color .15s ease;
+  }
+  .btn:hover{ border-color: var(--paper-dim); color: var(--paper); background: var(--bg-card); }
+  .btn:focus-visible{ outline: 2px solid var(--paper-dim); outline-offset: 2px; }
+
+  /* ============ LEGEND ============ */
+  .legend{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin: 0 0 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .legend-item{ display:flex; align-items:center; gap:7px; }
+  .legend-dot{
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--dot-color);
+    flex-shrink:0;
+  }
+  .legend-item.natural .legend-dot{ background: var(--accent-natural); }
+  .legend-item.formal  .legend-dot{ background: var(--accent-formal); }
+  .legend-item.social  .legend-dot{ background: var(--accent-social); }
+  .legend-item.applied .legend-dot{ background: var(--accent-applied); }
+  .legend-item.health  .legend-dot{ background: var(--accent-health); }
+  .legend-item.inter   .legend-dot{ background: var(--accent-inter); }
+
+  /* ============ TREE ============ */
+  .tree{ position: relative; }
+
+  .node{ position: relative; }
+  .node > summary.node-row,
+  .node > .node-row{
+    list-style: none;
+  }
+  summary.node-row::-webkit-details-marker,
+  summary.node-row::marker{ display:none; content:''; }
+
+  .node-row{
+    display:flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 9px 10px;
+    border-radius: var(--radius);
+    cursor: default;
+  }
+  details > summary.node-row{ cursor: pointer; }
+  details > summary.node-row:hover,
+  .node.leaf > .node-row:hover{ background: var(--bg-card); }
+  details > summary.node-row:focus-visible{
+    outline: 2px solid var(--accent, var(--paper-dim));
+    outline-offset: 2px;
+  }
+
+  /* toggle arrow for branches */
+  .node-toggle{
+    flex-shrink:0;
+    width: 1em; height: 1em;
+    margin-top: 0.32em;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .node-toggle::before{
+    content:'';
+    display:block;
+    width:0; height:0;
+    border-style: solid;
+    border-width: 5px 0 5px 7px;
+    border-color: transparent transparent transparent var(--muted);
+    transition: transform .16s ease;
+  }
+  details[open] > summary .node-toggle::before{ transform: rotate(90deg); }
+
+  /* bullet for leaves */
+  .node-bullet{
+    flex-shrink:0;
+    width: 1em; height: 1em;
+    margin-top: 0.32em;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .node-bullet::before{
+    content:'';
+    display:block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent, var(--muted));
+  }
+
+  .node-main{ display:flex; flex-direction:column; gap: 3px; min-width:0; }
+  .node-heading{ display:flex; align-items:baseline; gap: 10px; flex-wrap: wrap; }
+  .node-code{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted-dim);
+    min-width: 3.4em;
+    letter-spacing: 0.02em;
+  }
+  .node-name{ font-weight: 600; color: var(--paper); }
+  .node-desc{ font-size: 0.85rem; color: var(--muted); line-height: 1.45; max-width: 64ch; }
+
+  /* children indentation + connector lines */
+  .children{
+    margin-left: 10px;
+    padding-left: 22px;
+    border-left: 1px solid var(--line);
+  }
+  .children > .node{ position: relative; }
+  .children > .node > summary.node-row::before,
+  .children > .node.leaf > .node-row::before{
+    content:'';
+    position:absolute;
+    left: -22px;
+    top: 1.05em;
+    width: 21px;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* depth-specific typography */
+  .node.depth-0{
+    margin-bottom: 30px;
+    padding-top: 22px;
+    border-top: 2px solid var(--accent);
+  }
+  .node.depth-0 > summary .node-code{ font-size: 0.82rem; color: var(--accent); }
+  .node.depth-0 > summary .node-name{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .node.depth-0 > summary .node-desc{ font-size: 1rem; max-width: 68ch; color: var(--paper-dim); }
+  .node.depth-0 > summary .node-toggle::before{ border-color: transparent transparent transparent var(--accent); }
+  .node.depth-0 > summary{ padding-left: 0; padding-right:0; }
+  .node.depth-0 > summary:hover{ background: transparent; }
+  .node.depth-0 > .children{ margin-top: 14px; }
+
+  .node.depth-1 > summary .node-name,
+  .node.depth-1 > .node-row .node-name{
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    font-weight: 600;
+  }
+  .node.depth-1 > summary .node-desc,
+  .node.depth-1 > .node-row .node-desc{ font-size: 0.9rem; }
+
+  .node.depth-2 .node-name{ font-size: 0.97rem; }
+  .node.depth-3 .node-name{ font-size: 0.95rem; font-weight: 500; }
+
+  .node.leaf .node-toggle{ display:none; }
+
+  /* accent variables per domain — inherited by all descendants */
+  .accent-natural{ --accent: var(--accent-natural); }
+  .accent-formal{  --accent: var(--accent-formal); }
+  .accent-social{  --accent: var(--accent-social); }
+  .accent-applied{ --accent: var(--accent-applied); }
+  .accent-health{  --accent: var(--accent-health); }
+  .accent-inter{   --accent: var(--accent-inter); }
+
+  /* ============ SEARCH MODE ============ */
+  .tree.searching .node.no-match{ display:none !important; }
+  .tree.searching .node:not(.no-match) > .children{ display:block !important; }
+  .tree.searching .node.match > summary.node-row,
+  .tree.searching .node.match > .node-row{
+    background: var(--bg-card);
+    box-shadow: inset 2px 0 0 var(--accent);
+  }
+
+  /* ============ FOOTER ============ */
+  .footer{
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  .footer p{ max-width: 68ch; }
+  .footer .sign{
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 1rem;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 640px){
+    .wrap{ padding: 36px 16px 72px; }
+    .hero-glyph{ width: 60px; height: 60px; top: -4px; right: -2px; }
+    .node-code{ display:none; }
+    .children{ padding-left: 16px; margin-left: 4px; }
+    .children > .node > summary.node-row::before,
+    .children > .node.leaf > .node-row::before{ left: -16px; width: 15px; }
+  }
+
+  /* ============ MOTION ============ */
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <svg class="hero-glyph" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+      <path d="M24 44 V28 M24 28 L11 13 M24 28 L24 8 M24 28 L37 15 M11 13 L11 5 M11 13 L4 9 M37 15 L37 6 M37 15 L44 11"/>
+      <circle cx="24" cy="44" r="2.2" fill="currentColor" stroke="none"/>
+      <circle cx="11" cy="13" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="24" cy="8" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="37" cy="15" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="11" cy="5" r="1.6" fill="currentColor" stroke="none"/>
+      <circle cx="4" cy="9" r="1.6" fill="currentColor" stroke="none"/>
+      <circle cx="37" cy="6" r="1.6" fill="currentColor" stroke="none"/>
+      <circle cx="44" cy="11" r="1.6" fill="currentColor" stroke="none"/>
+    </svg>
+    <p class="eyebrow">
+      A FIELD INDEX
+      <span>·</span>
+      <span><span class="stat-num" id="stat-domains">–</span> domains</span>
+      <span><span class="stat-num" id="stat-disciplines">–</span> disciplines</span>
+      <span><span class="stat-num" id="stat-total">–</span> fields catalogued</span>
+    </p>
+    <h1>The Tree of Science</h1>
+    <p class="lede">From the curvature of spacetime to the grammar of a sentence, every line below is a branch of the same trunk: <em>organized human inquiry</em>. This index gathers the recognized domains, disciplines, and fields of science into one classification tree — numbered, described, and arranged from the broadest domain down to its most specific subfield.</p>
+    <p class="note">Click any branch to open it, or use <strong>Expand all</strong> to see the whole tree at once. Search filters by name or description. Boundaries between fields are drawn for clarity — in practice many disciplines overlap, borrow methods from one another, and resist tidy classification.</p>
+  </header>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search the tree — try “quantum”, “linguistics”, “soil”…" aria-label="Search fields of science">
+      <span class="search-count" id="search-count" aria-live="polite"></span>
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="expand-all" type="button">Expand all</button>
+      <button class="btn" id="collapse-all" type="button">Collapse all</button>
+    </div>
+  </div>
+
+  <nav class="legend" aria-label="Domain color legend">
+    <span class="legend-item natural"><span class="legend-dot"></span>Natural Sciences</span>
+    <span class="legend-item formal"><span class="legend-dot"></span>Formal Sciences</span>
+    <span class="legend-item social"><span class="legend-dot"></span>Social Sciences</span>
+    <span class="legend-item applied"><span class="legend-dot"></span>Applied Sciences &amp; Engineering</span>
+    <span class="legend-item health"><span class="legend-dot"></span>Health &amp; Medical Sciences</span>
+    <span class="legend-item inter"><span class="legend-dot"></span>Interdisciplinary &amp; Emerging Sciences</span>
+  </nav>
+
+  <main class="tree" id="tree" aria-label="Tree of science"></main>
+
+  <footer class="footer">
+    <p>Numbering follows a simple decimal classification: each digit is a step down the tree, in the spirit of the library classification systems once designed to organize all of human knowledge under one scheme. <span id="footer-total">–</span> fields are indexed here — and science keeps growing new branches.</p>
+    <p class="sign">— compiled as a map, not a fence. Use it to find your way in, then go further than the index does.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ======================================================
+     DATA
+     Each node: { name, desc, children?, accent? (domain only) }
+     Large branches are split into named constants below so
+     each can be assembled independently.
+  ====================================================== */
+
+  // ---- Natural Sciences sub-branches ----
+  var PHYSICS_CHILDREN = [
+    { name: "Classical Mechanics", desc: "Describes the motion of everyday objects under forces — from falling apples to orbiting planets — using Newton's laws of motion and gravitation." },
+    { name: "Thermodynamics & Statistical Mechanics", desc: "Studies heat, work, energy, and entropy, linking the microscopic behavior of particles to macroscopic properties like temperature and pressure." },
+    { name: "Electromagnetism", desc: "Examines electric and magnetic fields and their interactions with charged particles, underlying everything from electrical circuits to visible light." },
+    { name: "Optics", desc: "Studies the behavior, generation, and propagation of light, including reflection, refraction, diffraction, and the design of lenses and imaging instruments." },
+    { name: "Quantum Mechanics", desc: "Describes the behavior of matter and energy at atomic and subatomic scales, where particles show probabilistic, wave-like properties." },
+    { name: "Relativity", desc: "Einstein's theories of how space, time, gravity, and motion are interconnected, especially at very high speeds or in strong gravitational fields." },
+    { name: "Particle Physics", desc: "Investigates the most fundamental constituents of matter — quarks, leptons, and force-carrying bosons — and the interactions between them." },
+    { name: "Nuclear Physics", desc: "Studies the structure, behavior, and reactions of atomic nuclei, including radioactivity, nuclear fission, and nuclear fusion." },
+    { name: "Atomic, Molecular & Optical Physics", desc: "Focuses on how atoms and molecules interact with each other and with light at the quantum level." },
+    { name: "Condensed Matter Physics", desc: "Examines the physical properties of solids and liquids, including superconductors, magnetic materials, and semiconductors." },
+    { name: "Plasma Physics", desc: "Studies ionized gases — the fourth state of matter — found in stars, lightning, neon signs, and fusion reactors." },
+    { name: "Acoustics", desc: "The science of sound: its production, transmission, and effects, spanning musical instruments, architectural design, and noise control." },
+    { name: "Fluid Dynamics", desc: "Studies how liquids and gases move and respond to forces, essential for understanding weather, ocean currents, and aircraft design." },
+    { name: "Computational & Mathematical Physics", desc: "Uses mathematical models, numerical methods, and computer simulation to solve physical problems too complex for exact analytical solutions." }
+  ];
+  var CHEMISTRY_CHILDREN = [
+    { name: "Organic Chemistry", desc: "Studies carbon-containing compounds, especially those found in living things, fuels, plastics, dyes, and pharmaceuticals." },
+    { name: "Inorganic Chemistry", desc: "Examines compounds without carbon-hydrogen backbones, including metals, minerals, salts, and industrial catalysts." },
+    { name: "Physical Chemistry", desc: "Applies the principles of physics — thermodynamics, kinetics, and quantum mechanics — to understand chemical systems and reaction rates." },
+    { name: "Analytical Chemistry", desc: "Develops and applies methods to identify and measure the chemical components of substances and mixtures." },
+    { name: "Biochemistry", desc: "Explores the chemical processes within living organisms, including metabolism, enzymes, and the molecules of life such as DNA and proteins." },
+    { name: "Polymer Chemistry", desc: "Studies the synthesis, structure, and properties of large molecules made of repeating units, such as plastics, rubber, and fibers." },
+    { name: "Electrochemistry", desc: "Examines the relationship between electricity and chemical reactions, underlying batteries, fuel cells, corrosion, and electroplating." },
+    { name: "Nuclear & Radiochemistry", desc: "Studies radioactive elements and the chemistry of nuclear reactions, with applications in medicine, energy, and dating ancient materials." },
+    { name: "Theoretical & Computational Chemistry", desc: "Uses mathematical models and computer simulations to predict molecular structures, reactions, and properties before — or instead of — testing in a lab." },
+    { name: "Environmental Chemistry", desc: "Studies the chemical processes occurring in air, water, and soil, and how pollutants move through and affect ecosystems." },
+    { name: "Medicinal Chemistry", desc: "Designs, synthesizes, and refines chemical compounds for use as pharmaceutical drugs." },
+    { name: "Geochemistry", desc: "Examines the chemical composition of the Earth and other planetary bodies, and the processes that distribute elements within them." },
+    { name: "Photochemistry", desc: "Studies chemical reactions triggered by the absorption of light, including photosynthesis, vision, and photographic processes." }
+  ];
+  var GEOLOGY_CHILDREN = [
+    { name: "Mineralogy", desc: "Studies the chemistry, crystal structure, and physical properties of the minerals that make up rocks and the Earth's crust." },
+    { name: "Petrology", desc: "Examines the origin, composition, and classification of rocks — igneous, sedimentary, and metamorphic — and the processes that form them." },
+    { name: "Seismology", desc: "Studies earthquakes and the propagation of seismic waves through the Earth, used to probe the planet's interior and assess hazards." },
+    { name: "Volcanology", desc: "Investigates volcanoes, magma, and eruptions, including how to forecast activity and assess risks to nearby communities." },
+    { name: "Paleontology", desc: "Studies fossils to reconstruct the history of life on Earth, including ancient organisms, ecosystems, and mass extinctions." },
+    { name: "Geomorphology", desc: "Examines the origin and evolution of landforms — mountains, valleys, dunes, and coastlines — shaped by erosion, tectonics, and climate." },
+    { name: "Sedimentology", desc: "Studies how sediments form, are transported and deposited, and gradually become layered sedimentary rock." },
+    { name: "Hydrogeology", desc: "Investigates the distribution, movement, and quality of groundwater held within soil and rock formations." },
+    { name: "Geochronology", desc: "Determines the age of rocks, fossils, and geological events using radiometric dating and other dating techniques." },
+    { name: "Soil Science (Pedology)", desc: "Studies how soils form, how they are classified, and their role as a living resource for agriculture and ecosystems." },
+    { name: "Glaciology", desc: "Studies glaciers and ice sheets, their movement, and their role in shaping landscapes and regulating the Earth's climate." }
+  ];
+  var ATMOS_OCEAN_CHILDREN = [
+    { name: "Meteorology", desc: "Studies short-term atmospheric conditions and the physical processes behind them, forming the basis of weather forecasting." },
+    { name: "Climatology", desc: "Examines long-term patterns and variability in weather over years, decades, and centuries, including the causes and effects of climate change." },
+    { name: "Oceanography", desc: "Studies the physical, chemical, biological, and geological aspects of the world's oceans, from currents to deep-sea ecosystems." },
+    { name: "Atmospheric Chemistry", desc: "Investigates the chemical composition of the atmosphere, including air pollution, the ozone layer, and greenhouse gases." },
+    { name: "Hydrology", desc: "Studies the movement, distribution, and quality of water across the land — in rivers, lakes, soil, and the water cycle." }
+  ];
+  var ASTRONOMY_CHILDREN = [
+    { name: "Observational Astronomy", desc: "Uses telescopes and instruments across the electromagnetic spectrum to detect, measure, and catalogue celestial objects." },
+    { name: "Astrophysics", desc: "Applies the laws of physics to explain the structure, behavior, and evolution of stars, galaxies, and other cosmic objects." },
+    { name: "Cosmology", desc: "Studies the origin, evolution, large-scale structure, and ultimate fate of the universe as a whole." },
+    { name: "Planetary Science", desc: "Examines planets, moons, asteroids, and comets — including those of our own solar system — and how planetary systems form." },
+    { name: "Stellar Astronomy", desc: "Focuses on the properties, life cycles, and eventual deaths of stars, from formation in nebulae to supernovae and remnants." },
+    { name: "Galactic & Extragalactic Astronomy", desc: "Studies the structure, dynamics, formation, and evolution of galaxies, galaxy clusters, and the cosmic web that connects them." },
+    { name: "Astrobiology", desc: "Investigates the origin and evolution of life, and the conditions under which life might exist elsewhere in the universe." },
+    { name: "Radio Astronomy", desc: "Studies celestial objects by detecting the radio waves they emit, revealing phenomena invisible to optical telescopes such as pulsars and cosmic background radiation." },
+    { name: "Astrometry", desc: "Precisely measures the positions, distances, and motions of stars and other celestial bodies." }
+  ];
+  var LIFE_SCIENCES_CHILDREN = [
+    { name: "Botany", desc: "Studies plants — their structure, growth, classification, and ecological roles, from algae and mosses to flowering trees." },
+    { name: "Zoology", desc: "Studies animals — their behavior, physiology, classification, and evolutionary relationships, across the whole animal kingdom." },
+    { name: "Microbiology", desc: "Studies microscopic organisms such as bacteria, archaea, protists, and fungi, and their roles in health, disease, and the environment." },
+    { name: "Genetics", desc: "Studies genes, heredity, and genetic variation — how traits are passed from one generation to the next and how they change over time." },
+    { name: "Ecology", desc: "Studies how organisms interact with each other and their environment, including populations, communities, and whole ecosystems." },
+    { name: "Evolutionary Biology", desc: "Studies the processes — such as natural selection, mutation, and genetic drift — that drive the diversity and adaptation of life over time." },
+    { name: "Molecular Biology", desc: "Studies biological processes at the molecular level, focusing on DNA, RNA, and protein synthesis and regulation." },
+    { name: "Cell Biology", desc: "Studies the structure, function, and life cycle of cells — the basic building blocks of all living organisms." },
+    { name: "Physiology", desc: "Studies how organisms, organs, tissues, and cells function, and the mechanisms that keep living systems running." },
+    { name: "Anatomy", desc: "Studies the physical structure of organisms and their parts, from whole-body systems down to microscopic tissue structure." },
+    { name: "Immunology", desc: "Studies the immune system and how organisms recognize and defend against pathogens, toxins, and other threats." },
+    { name: "Neuroscience", desc: "Studies the nervous system — brain, spinal cord, and neurons — and how it produces sensation, movement, thought, and behavior." },
+    { name: "Marine Biology", desc: "Studies organisms that live in oceans and other saltwater environments, from microscopic plankton to whales and coral reefs." },
+    { name: "Virology", desc: "Studies viruses and virus-like agents — their structure, classification, and the ways they infect and interact with their hosts." },
+    { name: "Mycology", desc: "Studies fungi — including yeasts, molds, and mushrooms — their biology, ecology, and uses in medicine, food, and industry." },
+    { name: "Entomology", desc: "Studies insects — their biology, classification, behavior, and roles as pollinators, pests, and ecological indicators." },
+    { name: "Ornithology", desc: "Studies birds — their behavior, physiology, migration, and conservation." },
+    { name: "Herpetology", desc: "Studies reptiles and amphibians — their biology, behavior, and the threats facing many of these species." },
+    { name: "Ichthyology", desc: "Studies fish — their biology, classification, ecology, and evolutionary history." },
+    { name: "Developmental Biology", desc: "Studies how organisms grow and develop, from a single fertilized cell into a complex, fully formed body." },
+    { name: "Bioinformatics", desc: "Develops computational tools and methods to store, analyze, and interpret large biological datasets, especially genetic sequences." },
+    { name: "Taxonomy & Systematics", desc: "Classifies and names organisms, and studies the evolutionary relationships that connect different species." },
+    { name: "Paleobiology", desc: "Studies the biology, behavior, and ecology of ancient organisms using evidence preserved in the fossil record." },
+    { name: "Parasitology", desc: "Studies parasites — organisms that live on or in another organism — and their effects on hosts and ecosystems." },
+    { name: "Ethology", desc: "Studies animal behavior, particularly under natural conditions, often from an evolutionary and comparative perspective." }
+  ];
+
+  var NATURAL_CHILDREN = [
+    {
+      name: "Physical Sciences",
+      desc: "Branches of natural science that study non-living systems — matter, energy, forces, and their transformations — at every scale from the subatomic to the cosmic.",
+      children: [
+        {
+          name: "Physics",
+          desc: "Studies matter, energy, and the fundamental forces and laws governing their interactions, from subatomic particles to the structure of the universe.",
+          children: PHYSICS_CHILDREN
+        },
+        {
+          name: "Chemistry",
+          desc: "Studies the composition, structure, and properties of matter, and the reactions by which one substance is transformed into another.",
+          children: CHEMISTRY_CHILDREN
+        }
+      ]
+    },
+    {
+      name: "Earth & Environmental Sciences",
+      desc: "Studies the solid Earth, its atmosphere and oceans, and the processes — internal and external — that have shaped the planet and continue to shape it.",
+      children: [
+        {
+          name: "Geology",
+          desc: "Studies the solid Earth — its rocks, minerals, structures, and history — and the slow processes that build mountains, shape coastlines, and record deep time.",
+          children: GEOLOGY_CHILDREN
+        },
+        {
+          name: "Geophysics",
+          desc: "Applies the methods of physics to the Earth as a whole, studying its interior, gravity, magnetic field, and the propagation of seismic and other waves through it."
+        },
+        {
+          name: "Atmospheric & Ocean Sciences",
+          desc: "Studies the dynamics of the atmosphere and oceans, including weather, climate, and the circulation patterns that connect air and water across the planet.",
+          children: ATMOS_OCEAN_CHILDREN
+        },
+        {
+          name: "Environmental Science",
+          desc: "An interdisciplinary field combining biology, chemistry, geology, and policy to study the environment, ecosystems, and humanity's effects on them."
+        }
+      ]
+    },
+    {
+      name: "Space Sciences",
+      desc: "Studies celestial objects, the space between and beyond them, and the physical processes that govern planets, stars, galaxies, and the universe as a whole.",
+      children: [
+        {
+          name: "Astronomy & Astrophysics",
+          desc: "Studies celestial objects and phenomena — planets, stars, galaxies, and the universe itself — and applies the laws of physics to explain how they form, evolve, and interact.",
+          children: ASTRONOMY_CHILDREN
+        }
+      ]
+    },
+    {
+      name: "Life Sciences (Biology)",
+      desc: "Studies living organisms — their structure, function, growth, origin, evolution, and distribution — and the relationships between organisms and their environments.",
+      children: LIFE_SCIENCES_CHILDREN
+    }
+  ];
+
+  // ---- Formal Sciences sub-branches ----
+  var MATH_CHILDREN = [
+    { name: "Algebra", desc: "Studies mathematical symbols, equations, and the rules for manipulating them, including the abstract structures — groups, rings, and fields — they form." },
+    { name: "Geometry", desc: "Studies the properties, measurement, and relationships of points, lines, surfaces, and shapes in space." },
+    { name: "Calculus & Mathematical Analysis", desc: "Studies continuous change through derivatives, integrals, and limits — the mathematical language of motion, growth, and accumulation." },
+    { name: "Number Theory", desc: "Studies the properties and relationships of whole numbers, including prime numbers, divisibility, and famously hard unsolved problems." },
+    { name: "Topology", desc: "Studies the properties of space that survive stretching, bending, or twisting — but not tearing or gluing." },
+    { name: "Combinatorics", desc: "Studies the counting, arrangement, and combination of objects according to specified rules, underlying probability, computer science, and optimization." },
+    { name: "Probability Theory", desc: "Provides the mathematical framework for analyzing randomness, uncertainty, and the likelihood of different outcomes." },
+    { name: "Statistics", desc: "Develops methods for collecting, analyzing, interpreting, and presenting data, and for drawing reliable conclusions from it." },
+    { name: "Discrete Mathematics", desc: "Studies mathematical structures that are fundamentally discrete rather than continuous — such as graphs, networks, and logical statements." },
+    { name: "Differential Equations", desc: "Studies equations that relate quantities to their rates of change, used to model dynamic systems throughout science and engineering." },
+    { name: "Numerical Analysis", desc: "Develops algorithms that approximate solutions to mathematical problems too complex to solve exactly, and studies how accurate those approximations are." },
+    { name: "Mathematical Logic", desc: "Studies formal logical systems and their relationship to mathematics, including proof theory, model theory, and set theory." },
+    { name: "Game Theory", desc: "Studies mathematical models of strategic interaction, where the outcome for each participant depends on the choices of others." }
+  ];
+  var LOGIC_CHILDREN = [
+    { name: "Formal Logic", desc: "Studies the structure of arguments using symbolic notation, evaluating whether a conclusion follows from its premises independent of subject matter." },
+    { name: "Computational Logic", desc: "Applies formal logic to computing — including automated reasoning, program verification, and the logical foundations of programming languages." }
+  ];
+  var CS_CHILDREN = [
+    { name: "Algorithms & Data Structures", desc: "Studies efficient step-by-step procedures for solving computational problems and the ways of organizing data to support them." },
+    { name: "Artificial Intelligence", desc: "Develops systems that perform tasks normally requiring human intelligence, such as reasoning, perception, and decision-making." },
+    { name: "Machine Learning", desc: "Develops algorithms that let computers find patterns in data and improve their performance without being explicitly programmed for every case." },
+    { name: "Theory of Computation", desc: "Studies the fundamental capabilities and limits of computers — what can be computed, how efficiently, and what can never be computed at all." },
+    { name: "Software Engineering", desc: "Applies engineering discipline to the design, development, testing, and maintenance of software systems." },
+    { name: "Computer Networks", desc: "Studies how computers communicate and share resources, from local networks to the protocols that run the global internet." },
+    { name: "Cybersecurity", desc: "Focuses on protecting computer systems, networks, and data from unauthorized access, damage, or attack." },
+    { name: "Database Systems", desc: "Studies the design, organization, storage, and querying of structured collections of data." },
+    { name: "Human-Computer Interaction", desc: "Studies how people interact with computers and designs interfaces that are usable, efficient, and accessible." },
+    { name: "Computer Graphics", desc: "Studies how to generate, manipulate, and render visual content — images, animation, and 3D scenes — using computers." },
+    { name: "Robotics", desc: "Designs, builds, and programs robots that can sense their surroundings, plan actions, and act in the physical world." },
+    { name: "Cryptography", desc: "Studies techniques for secure communication and for protecting information from being read or altered by adversaries." },
+    { name: "Computer Architecture", desc: "Studies how computer hardware components are organized and designed to execute instructions efficiently." },
+    { name: "Operating Systems", desc: "Studies the software layer that manages a computer's hardware resources and provides services to other programs." },
+    { name: "Distributed & Quantum Computing", desc: "Studies systems made of many coordinating computers, and computation that exploits quantum-mechanical effects like superposition and entanglement." }
+  ];
+  var SYSTEMS_CHILDREN = [
+    { name: "Systems Theory", desc: "Provides a general framework for analyzing complex systems across disciplines by studying their structure, boundaries, and behavior as a whole." },
+    { name: "Cybernetics", desc: "Studies regulatory and communication processes — especially feedback loops — in machines, organisms, and organizations." },
+    { name: "Information Theory", desc: "Studies the quantification, storage, and communication of information, including the limits of data compression and error-free transmission." },
+    { name: "Complexity Science", desc: "Studies systems made of many interacting parts whose collective behavior is more than the sum of its pieces, such as traffic, markets, and ecosystems." }
+  ];
+
+  var FORMAL_CHILDREN = [
+    {
+      name: "Mathematics",
+      desc: "Studies numbers, quantities, structures, patterns, and the logical relationships between them, using rigorous proof rather than experiment.",
+      children: MATH_CHILDREN
+    },
+    {
+      name: "Logic",
+      desc: "The systematic study of valid inference, reasoning, and argumentation — the rules that separate a sound conclusion from an unsound one.",
+      children: LOGIC_CHILDREN
+    },
+    {
+      name: "Computer Science",
+      desc: "Studies computation, algorithms, and the design of software and hardware systems, and what problems can — and cannot — be solved by a machine.",
+      children: CS_CHILDREN
+    },
+    {
+      name: "Systems Science",
+      desc: "Studies systems as integrated wholes, focusing on the relationships, feedback, and emergent behavior that arise between their parts.",
+      children: SYSTEMS_CHILDREN
+    }
+  ];
+
+  // ---- Social Sciences sub-branches ----
+  var PSYCH_CHILDREN = [
+    { name: "Cognitive Psychology", desc: "Studies mental processes such as perception, attention, memory, language, and problem-solving." },
+    { name: "Behavioral Psychology", desc: "Studies observable behavior and how it is shaped by learning, reinforcement, and the environment." },
+    { name: "Developmental Psychology", desc: "Studies how people grow and change — physically, cognitively, emotionally, and socially — from infancy through old age." },
+    { name: "Clinical Psychology", desc: "Focuses on assessing, diagnosing, and treating mental, emotional, and behavioral disorders." },
+    { name: "Social Psychology", desc: "Studies how people's thoughts, feelings, and behaviors are influenced by other people, groups, and social situations." },
+    { name: "Neuropsychology", desc: "Studies the relationship between brain structure and function and behavior, particularly after injury, illness, or disease." },
+    { name: "Psychometrics", desc: "Develops and validates tests and measurements of psychological traits, such as intelligence, personality, and aptitude." },
+    { name: "Personality Psychology", desc: "Studies the patterns of thought, emotion, and behavior that make individuals distinct and relatively consistent over time." },
+    { name: "Evolutionary Psychology", desc: "Examines psychological traits — such as fears, preferences, and social behaviors — as adaptations shaped by natural selection." }
+  ];
+  var SOC_CHILDREN = [
+    { name: "Criminology", desc: "Studies crime, why it happens, and how societies and institutions respond to it through policing, courts, and corrections." },
+    { name: "Demography", desc: "Studies the size, structure, and dynamics of human populations, including birth rates, death rates, aging, and migration." },
+    { name: "Urban Sociology", desc: "Studies the social structures, relationships, and ways of life that develop within cities and urban environments." }
+  ];
+  var ANTHRO_CHILDREN = [
+    { name: "Cultural Anthropology", desc: "Studies the diversity of human cultures — beliefs, customs, social practices, and ways of life — around the world." },
+    { name: "Biological & Physical Anthropology", desc: "Studies human biological evolution, genetic variation, and the relationship between biology, behavior, and culture." },
+    { name: "Archaeology", desc: "Studies past human societies by recovering and analyzing material remains — tools, structures, and artifacts — left behind." },
+    { name: "Linguistic Anthropology", desc: "Studies how language shapes, and is shaped by, social life, identity, and culture." }
+  ];
+  var ECON_CHILDREN = [
+    { name: "Microeconomics", desc: "Studies the decisions of individuals, households, and firms, and how those decisions interact in markets." },
+    { name: "Macroeconomics", desc: "Studies the economy as a whole — growth, inflation, unemployment, and the policies that affect them." },
+    { name: "Econometrics", desc: "Applies statistical methods to economic data to test theories, measure relationships, and forecast trends." },
+    { name: "Behavioral Economics", desc: "Combines insights from psychology with economics to study how people actually make decisions, as opposed to how traditional models assume they do." },
+    { name: "Development Economics", desc: "Studies the economic conditions, institutions, and policies of lower-income countries, and how living standards can be improved." }
+  ];
+  var POLISCI_CHILDREN = [
+    { name: "Comparative Politics", desc: "Studies and compares political systems, institutions, and processes across different countries and regions." },
+    { name: "International Relations", desc: "Studies interactions between nations and global actors, including diplomacy, conflict, trade, and international organizations." },
+    { name: "Public Policy", desc: "Studies how government policies and programs are designed, implemented, and evaluated, and with what effects." }
+  ];
+  var LINGUISTICS_CHILDREN = [
+    { name: "Phonetics & Phonology", desc: "Studies the sounds of human speech — how they are produced, perceived, and organized into the sound systems of languages." },
+    { name: "Syntax", desc: "Studies the rules that govern how words combine to form phrases and sentences in a language." },
+    { name: "Semantics", desc: "Studies meaning in language — how words, phrases, and sentences convey information and relate to the world." },
+    { name: "Sociolinguistics", desc: "Studies how language varies and changes according to social factors such as region, class, age, and identity." },
+    { name: "Historical Linguistics", desc: "Studies how languages change over time and how related languages descend from common ancestors." },
+    { name: "Computational Linguistics", desc: "Develops computational models and methods for analyzing, understanding, and generating human language." },
+    { name: "Psycholinguistics", desc: "Studies the mental processes involved in acquiring, understanding, and producing language." }
+  ];
+  var HUMAN_GEO_CHILDREN = [
+    { name: "Cartography", desc: "The art and science of designing and creating maps to represent geographic information clearly and accurately." },
+    { name: "Geographic Information Systems (GIS)", desc: "Combines geographic data with computer technology to capture, store, analyze, and visualize spatial information." }
+  ];
+
+  var SOCIAL_CHILDREN = [
+    {
+      name: "Psychology",
+      desc: "The scientific study of the mind and behavior — how people think, feel, develop, and act, individually and in relation to others.",
+      children: PSYCH_CHILDREN
+    },
+    {
+      name: "Sociology",
+      desc: "Studies human society, social relationships, institutions, and the forces — culture, class, and community — that shape collective life.",
+      children: SOC_CHILDREN
+    },
+    {
+      name: "Anthropology",
+      desc: "Studies humans across time and place — their societies, cultures, languages, and biological evolution — often through direct fieldwork.",
+      children: ANTHRO_CHILDREN
+    },
+    {
+      name: "Economics",
+      desc: "Studies how individuals, businesses, and societies produce, distribute, and consume goods, services, and resources under conditions of scarcity.",
+      children: ECON_CHILDREN
+    },
+    {
+      name: "Political Science",
+      desc: "Studies government, political behavior, institutions, power, and the relationships between states, citizens, and organizations.",
+      children: POLISCI_CHILDREN
+    },
+    {
+      name: "Linguistics",
+      desc: "Studies the structure, meaning, use, and evolution of human language, both as an abstract system and as it is actually spoken and signed.",
+      children: LINGUISTICS_CHILDREN
+    },
+    {
+      name: "Human Geography",
+      desc: "Studies the spatial patterns of human activity — population, culture, cities, and economies — and how people shape, and are shaped by, place.",
+      children: HUMAN_GEO_CHILDREN
+    },
+    {
+      name: "Education & Pedagogy",
+      desc: "Studies how people learn and how teaching, curricula, and institutions can be designed to support that learning effectively."
+    },
+    {
+      name: "Communication Studies",
+      desc: "Studies how messages, media, and information are created, transmitted, and interpreted across interpersonal, organizational, and mass communication."
+    }
+  ];
+
+  // ---- Applied Sciences & Engineering sub-branches ----
+  var ENGINEERING_CHILDREN = [
+    { name: "Mechanical Engineering", desc: "Designs and analyzes machines, engines, tools, and mechanical systems, applying mechanics, materials, and thermodynamics." },
+    { name: "Electrical Engineering", desc: "Designs and develops systems that generate, transmit, and use electricity, electronics, and electromagnetic signals." },
+    { name: "Civil Engineering", desc: "Designs, builds, and maintains infrastructure such as buildings, bridges, roads, dams, and water systems." },
+    { name: "Chemical Engineering", desc: "Applies chemistry, physics, and biology to design large-scale processes that transform raw materials into useful products." },
+    { name: "Aerospace Engineering", desc: "Designs aircraft, spacecraft, satellites, and the systems and technologies that let them fly." },
+    { name: "Biomedical Engineering", desc: "Applies engineering principles to medicine and biology, developing devices such as prosthetics, imaging equipment, and artificial organs." },
+    { name: "Environmental Engineering", desc: "Designs systems and solutions for environmental problems, such as water and air treatment, waste management, and pollution control." },
+    { name: "Industrial & Systems Engineering", desc: "Optimizes complex processes, supply chains, and organizations to improve efficiency, quality, and safety." },
+    { name: "Materials Science & Engineering", desc: "Studies the structure and properties of materials, and develops new materials with properties tailored to specific uses." },
+    { name: "Nuclear Engineering", desc: "Applies the principles of nuclear physics to design reactors, radiation shielding, and related technologies." },
+    { name: "Agricultural Engineering", desc: "Applies engineering principles to agricultural production, processing, and the machinery and systems that support farming." },
+    { name: "Petroleum Engineering", desc: "Focuses on the exploration, extraction, and production of oil and natural gas from beneath the Earth's surface." },
+    { name: "Mining Engineering", desc: "Designs methods and systems for the safe, efficient extraction of minerals and ores from the earth." },
+    { name: "Marine & Naval Engineering", desc: "Designs, builds, and maintains ships, submarines, offshore platforms, and other marine vessels and structures." },
+    { name: "Genetic & Bioprocess Engineering", desc: "Applies engineering methods to modify organisms and design large-scale biological production processes, such as fermentation and gene editing." }
+  ];
+  var AGRI_CHILDREN = [
+    { name: "Agronomy", desc: "Studies crop production and the management of soil to grow food, fiber, and fuel crops sustainably." },
+    { name: "Horticulture", desc: "Studies the cultivation of fruits, vegetables, flowers, and ornamental plants." },
+    { name: "Animal Science", desc: "Studies the biology, breeding, nutrition, and management of domesticated animals raised for food and other products." },
+    { name: "Food Science", desc: "Studies the physical, chemical, and biological properties of food, and the principles behind processing, safety, and preservation." },
+    { name: "Forestry", desc: "Studies the management, conservation, and sustainable use of forests and woodland ecosystems." },
+    { name: "Aquaculture", desc: "Studies the farming of fish, shellfish, and aquatic plants for food, restoration, and other uses." }
+  ];
+
+  var APPLIED_CHILDREN = [
+    {
+      name: "Engineering",
+      desc: "Applies scientific and mathematical principles to design, build, test, and maintain structures, machines, systems, and processes.",
+      children: ENGINEERING_CHILDREN
+    },
+    {
+      name: "Architecture",
+      desc: "The art and science of designing buildings and other structures, balancing function, safety, durability, and aesthetics."
+    },
+    {
+      name: "Agricultural Sciences",
+      desc: "Studies the production, processing, and management of food, fiber, and other agricultural products, from soil to harvest.",
+      children: AGRI_CHILDREN
+    }
+  ];
+
+  // ---- Health & Medical Sciences ----
+  var HEALTH_CHILDREN = [
+    { name: "Medicine", desc: "The science and practice of diagnosing, treating, and preventing disease and injury in humans." },
+    { name: "Pharmacology", desc: "Studies how drugs interact with biological systems to produce therapeutic effects, side effects, and toxicity." },
+    { name: "Nursing", desc: "Focuses on the care of individuals, families, and communities to promote health, prevent illness, and support recovery." },
+    { name: "Dentistry", desc: "Focuses on the diagnosis, treatment, and prevention of conditions affecting the teeth, gums, and mouth." },
+    { name: "Veterinary Medicine", desc: "Focuses on the diagnosis, treatment, and prevention of injury and disease in animals." },
+    { name: "Epidemiology", desc: "Studies the distribution, patterns, and causes of disease and health-related events across populations." },
+    { name: "Public Health", desc: "Focuses on protecting and improving the health of communities through education, prevention, and policy rather than treating individuals one at a time." },
+    { name: "Nutrition Science", desc: "Studies how food and its components affect growth, health, and disease, and how diets can be improved." },
+    { name: "Pathology", desc: "Studies the causes and effects of disease, often through laboratory examination of tissues, cells, and body fluids." },
+    { name: "Toxicology", desc: "Studies the harmful effects of chemicals, drugs, and other substances on living organisms, and how to assess and manage those risks." },
+    { name: "Genomics", desc: "Studies an organism's complete set of genes — how they are structured, how they function, and how they interact." },
+    { name: "Psychiatry", desc: "A branch of medicine focused on the diagnosis, treatment, and prevention of mental, emotional, and behavioral disorders." },
+    { name: "Radiology", desc: "Uses imaging technologies such as X-rays, CT, MRI, and ultrasound to diagnose and sometimes treat disease." },
+    { name: "Surgery", desc: "A branch of medicine that treats injuries, diseases, and disorders through operative procedures." }
+  ];
+
+  // ---- Interdisciplinary & Emerging Sciences ----
+  var INTER_CHILDREN = [
+    { name: "Cognitive Science", desc: "An interdisciplinary study of the mind, combining psychology, neuroscience, linguistics, philosophy, and computer science to ask how thinking works." },
+    { name: "Nanotechnology", desc: "Studies and manipulates matter at the scale of atoms and molecules to create new materials, devices, and systems." },
+    { name: "Systems Biology", desc: "Studies biological systems as networks of interacting components, using computational and mathematical models rather than looking at parts in isolation." },
+    { name: "Biophysics", desc: "Applies the methods and principles of physics to understand biological structures and processes, from protein folding to nerve impulses." },
+    { name: "Data Science", desc: "Combines statistics, computer science, and domain knowledge to extract insight and make predictions from large, often messy, datasets." },
+    { name: "Network Science", desc: "Studies the structure and dynamics of complex networks — social, biological, and technological — and how connections shape behavior." },
+    { name: "Synthetic Biology", desc: "Designs and constructs new biological parts, organisms, and systems, or redesigns existing ones for useful purposes." },
+    { name: "Forensic Science", desc: "Applies scientific methods — from chemistry to genetics — to collect and analyze evidence for criminal and civil investigations." },
+    { name: "Sports Science", desc: "Studies how the human body performs during exercise and competition, and how training, nutrition, and equipment can improve performance and recovery." },
+    { name: "Gerontology", desc: "Studies the biological, psychological, and social aspects of aging and the needs of older adults." },
+    { name: "Library & Information Science", desc: "Studies how information and knowledge are organized, stored, retrieved, and shared, and how libraries and archives serve that purpose." },
+    { name: "Climate Science", desc: "An interdisciplinary field studying the Earth's climate system as a whole, and the causes, mechanisms, and impacts of climate change." },
+    { name: "Conservation Biology", desc: "Studies the loss, protection, and restoration of biodiversity and ecosystems threatened by human activity." },
+    { name: "Science, Technology & Society", desc: "Studies how scientific knowledge and technologies are shaped by — and in turn shape — social, cultural, and political life." },
+    { name: "Urban Planning", desc: "Studies and designs how land, transportation, and infrastructure in cities and regions are organized to create functional, sustainable places." }
+  ];
+
+  var DATA = {
+    name: "Science",
+    desc: "The systematic pursuit of reliable knowledge about the universe, life, society, and the formal structures of thought, through observation, experiment, measurement, and reasoned argument.",
+    children: [
+      {
+        name: "Natural Sciences",
+        accent: "natural",
+        desc: "The sciences that study the natural world — matter, energy, the Earth, space, and living things — through observation, experiment, and testable laws.",
+        children: NATURAL_CHILDREN
+      },
+      {
+        name: "Formal Sciences",
+        accent: "formal",
+        desc: "Disciplines concerned with formal systems — number, structure, logic, and computation — built on axioms and definitions rather than direct observation of the physical world.",
+        children: FORMAL_CHILDREN
+      },
+      {
+        name: "Social Sciences",
+        accent: "social",
+        desc: "Sciences that study human behavior, relationships, institutions, and societies, using systematic — often empirical — methods to ask how people think, act, and organize.",
+        children: SOCIAL_CHILDREN
+      },
+      {
+        name: "Applied Sciences & Engineering",
+        accent: "applied",
+        desc: "Fields that take knowledge from the natural and formal sciences and apply it to design, build, and improve the structures, machines, materials, and processes that solve practical problems.",
+        children: APPLIED_CHILDREN
+      },
+      {
+        name: "Health & Medical Sciences",
+        accent: "health",
+        desc: "Sciences devoted to understanding the body, diagnosing and treating disease and injury, and protecting and promoting health in individuals and populations.",
+        children: HEALTH_CHILDREN
+      },
+      {
+        name: "Interdisciplinary & Emerging Sciences",
+        accent: "inter",
+        desc: "Fields that sit between or across traditional disciplines, combining their tools and questions to study problems — from the workings of the mind to the behavior of complex systems — that no single science covers alone.",
+        children: INTER_CHILDREN
+      }
+    ]
+  };
+
+  /* ======================================================
+     RENDERING
+  ====================================================== */
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function rowInner(code, name, desc, hasChildren){
+    var toggle = hasChildren
+      ? '<span class="node-toggle" aria-hidden="true"></span>'
+      : '<span class="node-bullet" aria-hidden="true"></span>';
+    var descHtml = desc ? '<span class="node-desc">' + esc(desc) + '</span>' : '';
+    return toggle +
+      '<span class="node-main">' +
+        '<span class="node-heading"><span class="node-code">' + code + '</span><span class="node-name">' + esc(name) + '</span></span>' +
+        descHtml +
+      '</span>';
+  }
+
+  function renderNode(node, depth, path){
+    var hasChildren = Array.isArray(node.children) && node.children.length > 0;
+    var code = path.join('.');
+    var nameAttr = esc(node.name);
+    var descAttr = esc(node.desc || '');
+
+    if(hasChildren){
+      var openAttr = depth < 2 ? ' open' : '';
+      var inner = node.children.map(function(child, i){
+        return renderNode(child, depth + 1, path.concat(i + 1));
+      }).join('');
+      return '<details class="node depth-' + depth + ' has-children"' + openAttr +
+        ' data-name="' + nameAttr + '" data-desc="' + descAttr + '">' +
+        '<summary class="node-row">' + rowInner(code, node.name, node.desc, true) + '</summary>' +
+        '<div class="children">' + inner + '</div>' +
+        '</details>';
+    } else {
+      return '<div class="node depth-' + depth + ' leaf" data-name="' + nameAttr + '" data-desc="' + descAttr + '">' +
+        '<div class="node-row">' + rowInner(code, node.name, node.desc, false) + '</div>' +
+        '</div>';
+    }
+  }
+
+  function renderRoot(data){
+    return data.children.map(function(domain, i){
+      var code = String(i + 1);
+      var nameAttr = esc(domain.name);
+      var descAttr = esc(domain.desc || '');
+      var children = Array.isArray(domain.children) ? domain.children : [];
+      var inner = children.map(function(child, j){
+        return renderNode(child, 1, [i + 1, j + 1]);
+      }).join('');
+      return '<details class="node depth-0 has-children accent-' + domain.accent + '" open' +
+        ' data-name="' + nameAttr + '" data-desc="' + descAttr + '">' +
+        '<summary class="node-row">' + rowInner(code, domain.name, domain.desc, true) + '</summary>' +
+        '<div class="children">' + inner + '</div>' +
+        '</details>';
+    }).join('');
+  }
+
+  function countNodes(node){
+    if(!Array.isArray(node.children)) return 0;
+    return node.children.reduce(function(sum, c){
+      return sum + 1 + countNodes(c);
+    }, 0);
+  }
+
+  /* ======================================================
+     INIT
+  ====================================================== */
+  document.addEventListener('DOMContentLoaded', function(){
+    var treeEl = document.getElementById('tree');
+    treeEl.innerHTML = renderRoot(DATA);
+
+    var total = countNodes(DATA);
+    var domains = DATA.children.length;
+    var disciplines = DATA.children.reduce(function(sum, d){
+      return sum + (Array.isArray(d.children) ? d.children.length : 0);
+    }, 0);
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-domains').textContent = domains;
+    document.getElementById('stat-disciplines').textContent = disciplines;
+    document.getElementById('footer-total').textContent = total;
+
+    // Expand / collapse all
+    document.getElementById('expand-all').addEventListener('click', function(){
+      treeEl.querySelectorAll('details.node').forEach(function(d){ d.open = true; });
+    });
+    document.getElementById('collapse-all').addEventListener('click', function(){
+      treeEl.querySelectorAll('details.node').forEach(function(d){ d.open = false; });
+    });
+
+    // Search
+    var searchInput = document.getElementById('search');
+    var searchCount = document.getElementById('search-count');
+    var openBeforeSearch = null;
+
+    searchInput.addEventListener('input', function(){
+      var q = this.value.trim().toLowerCase();
+      var allNodes = treeEl.querySelectorAll('.node');
+
+      if(!q){
+        treeEl.classList.remove('searching');
+        allNodes.forEach(function(n){ n.classList.remove('no-match','match'); });
+        if(openBeforeSearch){
+          openBeforeSearch.forEach(function(state, d){ d.open = state; });
+          openBeforeSearch = null;
+        }
+        searchCount.textContent = '';
+        return;
+      }
+
+      if(!openBeforeSearch){
+        openBeforeSearch = new Map();
+        treeEl.querySelectorAll('details.node').forEach(function(d){
+          openBeforeSearch.set(d, d.open);
+        });
+      }
+
+      treeEl.classList.add('searching');
+      var matches = 0;
+      allNodes.forEach(function(n){
+        var name = (n.dataset.name || '').toLowerCase();
+        var desc = (n.dataset.desc || '').toLowerCase();
+        var isMatch = name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+        n.classList.toggle('match', isMatch);
+        if(isMatch) matches++;
+      });
+      allNodes.forEach(function(n){
+        var selfMatch = n.classList.contains('match');
+        var hasMatchingDescendant = !!n.querySelector('.node.match');
+        n.classList.toggle('no-match', !selfMatch && !hasMatchingDescendant);
+      });
+      searchCount.textContent = matches + (matches === 1 ? ' match' : ' matches');
+    });
+  });
+})();
+</script>
+</body>
+</html>
