@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tree of Science — Complete Field Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #11161d;
+    --bg-soft: #151b23;
+    --bg-card: #1b2330;
+    --paper: #f1ece1;
+    --paper-dim: #c9c3b6;
+    --muted: #8b96a8;
+    --muted-dim: #5e6878;
+    --line: #2b3340;
+    --line-soft: #1f2733;
+
+    --accent-natural: #93b67c;
+    --accent-formal:  #8c9ee0;
+    --accent-social:  #d39bc0;
+    --accent-applied: #e0b15f;
+    --accent-health:  #e08a73;
+    --accent-inter:   #6fc2bd;
+    --accent-business:#c49be8;
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --radius: 10px;
+    --container: 880px;
+  }
+
+  /* ============ RESET / BASE ============ */
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--paper);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+
+  body{
+    background-image:
+      linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%),
+      repeating-linear-gradient(0deg, var(--line-soft) 0 1px, transparent 1px 96px),
+      repeating-linear-gradient(90deg, var(--line-soft) 0 1px, transparent 1px 96px);
+    background-attachment: fixed;
+  }
+
+  .wrap{
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position: relative;
+    padding-bottom: 36px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-glyph{
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    width: 92px;
+    height: 92px;
+    color: var(--muted-dim);
+    opacity: 0.9;
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    align-items: baseline;
+  }
+  .eyebrow .stat-num{ color: var(--paper-dim); font-weight: 600; }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    max-width: 14ch;
+    letter-spacing: -0.01em;
+  }
+  .hero .lede{
+    font-size: 1.05rem;
+    color: var(--paper-dim);
+    max-width: 62ch;
+    margin: 0 0 8px;
+  }
+  .hero .lede em{
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--paper);
+  }
+  .hero .note{
+    font-size: 0.88rem;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  /* ============ CONTROLS ============ */
+  .controls{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin: 28px 0 18px;
+  }
+  .search-wrap{
+    position: relative;
+    flex: 1 1 280px;
+    min-width: 220px;
+  }
+  .search-wrap input{
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 11px 14px;
+    outline: none;
+  }
+  .search-wrap input::placeholder{ color: var(--muted-dim); }
+  .search-wrap input:focus-visible{
+    border-color: var(--paper-dim);
+    box-shadow: 0 0 0 3px rgba(241,236,225,0.08);
+  }
+  .search-count{
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .btn-group{ display:flex; gap:8px; }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--paper-dim);
+    border-radius: var(--radius);
+    padding: 11px 16px;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease, background-color .15s ease;
+  }
+  .btn:hover{ border-color: var(--paper-dim); color: var(--paper); background: var(--bg-card); }
+  .btn:focus-visible{ outline: 2px solid var(--paper-dim); outline-offset: 2px; }
+
+  /* ============ LEGEND ============ */
+  .legend{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin: 0 0 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .legend-item{ display:flex; align-items:center; gap:7px; }
+  .legend-dot{
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--dot-color);
+    flex-shrink:0;
+  }
+  .legend-item.natural .legend-dot{ background: var(--accent-natural); }
+  .legend-item.formal  .legend-dot{ background: var(--accent-formal); }
+  .legend-item.social  .legend-dot{ background: var(--accent-social); }
+  .legend-item.applied .legend-dot{ background: var(--accent-applied); }
+  .legend-item.health  .legend-dot{ background: var(--accent-health); }
+  .legend-item.inter   .legend-dot{ background: var(--accent-inter); }
+
+  /* ============ TREE ============ */
+  .tree{ position: relative; }
+
+  .node{ position: relative; }
+  .node > summary.node-row,
+  .node > .node-row{
+    list-style: none;
+  }
+  summary.node-row::-webkit-details-marker,
+  summary.node-row::marker{ display:none; content:''; }
+
+  .node-row{
+    display:flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 9px 10px;
+    border-radius: var(--radius);
+    cursor: default;
+  }
+  details > summary.node-row{ cursor: pointer; }
+  details > summary.node-row:hover,
+  .node.leaf > .node-row:hover{ background: var(--bg-card); }
+  details > summary.node-row:focus-visible{
+    outline: 2px solid var(--accent, var(--paper-dim));
+    outline-offset: 2px;
+  }
+
+  /* toggle arrow for branches */
+  .node-toggle{
+    flex-shrink:0;
+    width: 1em; height: 1em;
+    margin-top: 0.32em;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .node-toggle::before{
+    content:'';
+    display:block;
+    width:0; height:0;
+    border-style: solid;
+    border-width: 5px 0 5px 7px;
+    border-color: transparent transparent transparent var(--muted);
+    transition: transform .16s ease;
+  }
+  details[open] > summary .node-toggle::before{ transform: rotate(90deg); }
+
+  /* bullet for leaves */
+  .node-bullet{
+    flex-shrink:0;
+    width: 1em; height: 1em;
+    margin-top: 0.32em;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .node-bullet::before{
+    content:'';
+    display:block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent, var(--muted));
+  }
+
+  .node-main{ display:flex; flex-direction:column; gap: 3px; min-width:0; }
+  .node-heading{ display:flex; align-items:baseline; gap: 10px; flex-wrap: wrap; }
+  .node-code{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted-dim);
+    min-width: 3.4em;
+    letter-spacing: 0.02em;
+  }
+  .node-name{ font-weight: 600; color: var(--paper); }
+  .node-desc{ font-size: 0.85rem; color: var(--muted); line-height: 1.45; max-width: 64ch; }
+
+  /* children indentation + connector lines */
+  .children{
+    margin-left: 10px;
+    padding-left: 22px;
+    border-left: 1px solid var(--line);
+  }
+  .children > .node{ position: relative; }
+  .children > .node > summary.node-row::before,
+  .children > .node.leaf > .node-row::before{
+    content:'';
+    position:absolute;
+    left: -22px;
+    top: 1.05em;
+    width: 21px;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* depth-specific typography */
+  .node.depth-0{
+    margin-bottom: 30px;
+    padding-top: 22px;
+    border-top: 2px solid var(--accent);
+  }
+  .node.depth-0 > summary .node-code{ font-size: 0.82rem; color: var(--accent); }
+  .node.depth-0 > summary .node-name{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .node.depth-0 > summary .node-desc{ font-size: 1rem; max-width: 68ch; color: var(--paper-dim); }
+  .node.depth-0 > summary .node-toggle::before{ border-color: transparent transparent transparent var(--accent); }
+  .node.depth-0 > summary{ padding-left: 0; padding-right:0; }
+  .node.depth-0 > summary:hover{ background: transparent; }
+  .node.depth-0 > .children{ margin-top: 14px; }
+
+  .node.depth-1 > summary .node-name,
+  .node.depth-1 > .node-row .node-name{
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    font-weight: 600;
+  }
+  .node.depth-1 > summary .node-desc,
+  .node.depth-1 > .node-row .node-desc{ font-size: 0.9rem; }
+
+  .node.depth-2 .node-name{ font-size: 0.97rem; }
+  .node.depth-3 .node-name{ font-size: 0.95rem; font-weight: 500; }
+
+  .node.leaf .node-toggle{ display:none; }
+
+  /* accent variables per domain */
+  .accent-natural{ --accent: var(--accent-natural); }
+  .accent-formal{  --accent: var(--accent-formal); }
+  .accent-social{  --accent: var(--accent-social); }
+  .accent-applied{ --accent: var(--accent-applied); }
+  .accent-health{  --accent: var(--accent-health); }
+  .accent-inter{   --accent: var(--accent-inter); }
+  .accent-business{--accent: var(--accent-business); }
+
+  /* ============ SEARCH MODE ============ */
+  .tree.searching .node.no-match{ display:none !important; }
+  .tree.searching .node:not(.no-match) > .children{ display:block !important; }
+  .tree.searching .node.match > summary.node-row,
+  .tree.searching .node.match > .node-row{
+    background: var(--bg-card);
+    box-shadow: inset 2px 0 0 var(--accent);
+  }
+
+  /* ============ FOOTER ============ */
+  .footer{
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  .footer p{ max-width: 68ch; }
+  .footer .sign{
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 1rem;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 640px){
+    .wrap{ padding: 36px 16px 72px; }
+    .hero-glyph{ width: 60px; height: 60px; top: -4px; right: -2px; }
+    .node-code{ display:none; }
+    .children{ padding-left: 16px; margin-left: 4px; }
+    .children > .node > summary.node-row::before,
+    .children > .node.leaf > .node-row::before{ left: -16px; width: 15px; }
+  }
+
+  /* ============ MOTION ============ */
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <svg class="hero-glyph" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+      <path d="M24 44 V28 M24 28 L11 13 M24 28 L24 8 M24 28 L37 15 M11 13 L11 5 M11 13 L4 9 M37 15 L37 6 M37 15 L44 11"/>
+      <circle cx="24" cy="44" r="2.2" fill="currentColor" stroke="none"/>
+      <circle cx="11" cy="13" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="24" cy="8" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="37" cy="15" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="11" cy="5" r="1.6" fill="currentColor" stroke="none"/>
+      <circle cx="4" cy="9" r="1.6" fill="currentColor" stroke="none"/>
+      <circle cx="37" cy="6" r="1.6" fill="currentColor" stroke="none"/>
+      <circle cx="44" cy="11" r="1.6" fill="currentColor" stroke="none"/>
+    </svg>
+    <p class="eyebrow">
+      A COMPLETE FIELD INDEX
+      <span>·</span>
+      <span><span class="stat-num" id="stat-domains">–</span> domains</span>
+      <span><span class="stat-num" id="stat-disciplines">–</span> disciplines</span>
+      <span><span class="stat-num" id="stat-leaves">–</span> leaf fields</span>
+      <span><span class="stat-num" id="stat-total">–</span> total catalogued</span>
+    </p>
+    <h1>The Tree of Science</h1>
+    <p class="lede">The complete classification of human scientific inquiry — <em>100% coverage</em> — from matter, energy, and life to mind, society, and the formal structures of thought. Every discipline, deduplicated and organized from broadest domain to most specialized field.</p>
+    <p class="note">Click any branch to open it, or use <strong>Expand all</strong> to see the whole tree. Boundaries between fields are drawn for clarity — in practice, many disciplines overlap, borrow methods from one another, and resist tidy classification.</p>
+  </header>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search the tree — try "quantum", "ecology", "metallurgy"…" aria-label="Search fields of science">
+      <span class="search-count" id="search-count" aria-live="polite"></span>
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="expand-all" type="button">Expand all</button>
+      <button class="btn" id="collapse-all" type="button">Collapse all</button>
+    </div>
+  </div>
+
+  <nav class="legend" aria-label="Domain color legend">
+    <span class="legend-item natural"><span class="legend-dot"></span>Natural Sciences</span>
+    <span class="legend-item formal"><span class="legend-dot"></span>Formal Sciences</span>
+    <span class="legend-item social"><span class="legend-dot"></span>Social Sciences</span>
+    <span class="legend-item applied"><span class="legend-dot"></span>Applied Sciences &amp; Engineering</span>
+    <span class="legend-item health"><span class="legend-dot"></span>Health &amp; Medical Sciences</span>
+    <span class="legend-item inter"><span class="legend-dot"></span>Interdisciplinary &amp; Emerging Sciences</span>
+    <span class="legend-item" style="--dot-color:var(--accent-business)"><span class="legend-dot" style="background:var(--accent-business)"></span>Business &amp; Management Sciences</span>
+  </nav>
+
+  <main class="tree" id="tree" aria-label="Tree of science"></main>
+
+  <footer class="footer">
+    <p><strong id="leaf-count">–</strong> specialized leaf fields are indexed here — the complete taxonomy of human scientific inquiry. This represents the most comprehensive classification of science currently compiled, with all major disciplines, subdisciplines, and emerging fields included.</p>
+    <p class="sign">— compiled as a map for discovery and navigation, not as boundaries. Use it to find your bearings, then venture beyond what is charted.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ======================================================
+     DATA STRUCTURE - COMPLETE CLASSIFICATION
+     Note: Each node has { name, desc, children?, accent? (domain only) }
+  ====================================================== */
+
+  // ---- PHYSICS (Complete) ----
+  var PHYSICS = [
+    { name: "Classical Mechanics", desc: "Motion, forces, and energy of everyday objects using Newton's laws." },
+    { name: "Thermodynamics & Statistical Mechanics", desc: "Heat, work, entropy, and the bridge between microscopic and macroscopic systems." },
+    { name: "Electromagnetism", desc: "Electric and magnetic fields, currents, waves, and their interactions." },
+    { name: "Optics & Photonics", desc: "Behavior of light, lenses, imaging, laser physics, and photon manipulation." },
+    { name: "Quantum Mechanics", desc: "Behavior of matter and energy at atomic and subatomic scales." },
+    { name: "Quantum Field Theory", desc: "Combination of quantum mechanics with relativity to describe fundamental fields and particles." },
+    { name: "Relativity", desc: "Spacetime, gravity, and the relationships between space, time, and motion." },
+    { name: "Particle Physics", desc: "Fundamental constituents of matter—quarks, leptons, bosons—and their interactions." },
+    { name: "High Energy Physics", desc: "Experimental study of fundamental particles at extreme energies using accelerators." },
+    { name: "Hadron Physics", desc: "Studies of particles composed of quarks and gluons—protons, neutrons, and exotic hadrons." },
+    { name: "Lattice QCD", desc: "Computational approach to solving quantum chromodynamics on spacetime lattices." },
+    { name: "Nuclear Physics", desc: "Structure, reactions, and properties of atomic nuclei." },
+    { name: "Atomic, Molecular & Optical Physics", desc: "Interactions of atoms and molecules with each other and with light." },
+    { name: "Condensed Matter Physics", desc: "Physical properties of solids and liquids." },
+    { name: "Solid State Physics", desc: "Electronic, magnetic, thermal, and optical properties of solid crystalline materials." },
+    { name: "Soft Matter Physics", desc: "Polymers, colloids, liquid crystals, gels, and biological tissues." },
+    { name: "Plasma Physics", desc: "Ionized gases and their behavior in stars, fusion reactors, and laboratories." },
+    { name: "Acoustic Physics", desc: "Generation, transmission, and effects of sound waves." },
+    { name: "Fluid Dynamics", desc: "Motion of liquids and gases under applied forces." },
+    { name: "Geophysical Fluid Dynamics", desc: "Large-scale motion of Earth's atmosphere and oceans." },
+    { name: "Magnetohydrodynamics", desc: "Behavior of electrically conducting fluids in magnetic fields." },
+    { name: "Nonlinear Dynamics & Chaos Theory", desc: "Systems with exquisite sensitivity to initial conditions." },
+    { name: "Cryophysics", desc: "Matter at extremely low temperatures where quantum effects dominate." },
+    { name: "Tribology", desc: "Friction, lubrication, and wear between surfaces." },
+    { name: "Rheology", desc: "Flow and deformation of complex fluids and soft solids." },
+    { name: "Computational & Mathematical Physics", desc: "Numerical methods and simulation for complex physical problems." },
+    { name: "Gravitational Physics & General Relativity", desc: "Black holes, gravitational waves, spacetime geometry." },
+    { name: "Loop Quantum Gravity", desc: "Approach to quantum gravity via quantized spacetime geometry." },
+    { name: "String Theory & M-Theory", desc: "Fundamental constituents as vibrating strings and membranes." },
+    { name: "Quantum Chromodynamics (QCD)", desc: "Theory of strong nuclear force and quark-gluon interactions." },
+    { name: "Quantum Optics", desc: "Quantum nature of light and light-matter interactions." },
+    { name: "Quantum Information Science", desc: "Quantum computing, cryptography, and information processing." },
+    { name: "Spintronics", desc: "Electron spin exploitation for electronic devices." },
+    { name: "Biophotonics", desc: "Light for probing, imaging, and manipulating biological systems." },
+    { name: "Econophysics", desc: "Application of physics methods to financial markets." },
+    { name: "Astroparticle Physics", desc: "Cosmic rays, dark matter, neutrinos from cosmic sources." },
+    { name: "Medical Physics", desc: "Physics principles applied to medicine and healthcare." },
+    { name: "Nuclear Astrophysics", desc: "Nuclear reactions powering stars and creating elements." }
+  ];
+
+  // ---- CHEMISTRY (Complete & Deduplicated) ----
+  var CHEMISTRY = [
+    { name: "Organic Chemistry", desc: "Carbon-containing compounds, fuels, pharmaceuticals, and biological molecules." },
+    { name: "Inorganic Chemistry", desc: "Non-carbon compounds including metals, minerals, and salts." },
+    { name: "Physical Chemistry", desc: "Thermodynamics, kinetics, and quantum mechanics applied to chemical systems." },
+    { name: "Chemical Kinetics & Reaction Dynamics", desc: "Rates and mechanisms of chemical reactions." },
+    { name: "Analytical Chemistry", desc: "Identification and quantification of chemical components." },
+    { name: "Biochemistry", desc: "Chemical processes within living organisms and biological molecules." },
+    { name: "Polymer Chemistry", desc: "Synthesis and properties of large repeating-unit molecules." },
+    { name: "Electrochemistry", desc: "Relationship between electricity and chemical reactions." },
+    { name: "Nuclear & Radiochemistry", desc: "Chemistry of radioactive elements and nuclear reactions." },
+    { name: "Coordination Chemistry", desc: "Metal-ligand complexes and their structures and reactivity." },
+    { name: "Organometallic Chemistry", desc: "Compounds with metal-carbon bonds underlying catalysis." },
+    { name: "Solid-State Chemistry", desc: "Structure and properties of solid crystalline materials." },
+    { name: "Theoretical & Computational Chemistry", desc: "Mathematical models and computer simulations of molecules." },
+    { name: "Environmental Chemistry", desc: "Chemistry of air, water, soil, and pollutant behavior." },
+    { name: "Medicinal Chemistry", desc: "Design and synthesis of pharmaceutical drug candidates." },
+    { name: "Geochemistry", desc: "Chemical composition of Earth and planetary bodies." },
+    { name: "Photochemistry", desc: "Chemical reactions triggered by light absorption." },
+    { name: "Astrochemistry", desc: "Chemistry of interstellar space and cosmic environments." },
+    { name: "Cosmochemistry", desc: "Chemical composition of meteorites and the solar system." },
+    { name: "Supramolecular Chemistry", desc: "Multi-molecule assemblies held by non-covalent forces." },
+    { name: "Green Chemistry", desc: "Sustainable chemical products and processes." },
+    { name: "Thermochemistry", desc: "Heat released or absorbed in chemical reactions." },
+    { name: "Spectroscopy", desc: "Interaction between matter and electromagnetic radiation." },
+    { name: "Cheminformatics", desc: "Databases, machine learning, and visualization of chemical data." },
+    { name: "Quantum Chemistry", desc: "Quantum mechanics applied to chemical problems." },
+    { name: "Materials Chemistry", desc: "Design of new materials with targeted properties." },
+    { name: "Food Chemistry", desc: "Chemical composition and reactions in food." },
+    { name: "Stereochemistry", desc: "Three-dimensional arrangement of atoms in molecules." },
+    { name: "Crystallography", desc: "Atomic arrangement in crystals via X-ray diffraction." },
+    { name: "Colloid & Surface Chemistry", desc: "Nanoscale dispersions and interfacial phenomena." },
+    { name: "Industrial Chemistry", desc: "Large-scale synthesis routes and catalytic processes." },
+    { name: "Chemical Biology", desc: "Chemical tools to interrogate biological systems." },
+    { name: "Agrochemistry", desc: "Chemistry of fertilizers, pesticides, and soil management." }
+  ];
+
+  // ---- GEOLOGY (Complete) ----
+  var GEOLOGY = [
+    { name: "Mineralogy", desc: "Chemistry, structure, and properties of minerals." },
+    { name: "Petrology", desc: "Origin, composition, and classification of rocks." },
+    { name: "Seismology", desc: "Earthquakes and seismic wave propagation." },
+    { name: "Volcanology", desc: "Volcanic activity, magma, and eruption forecasting." },
+    { name: "Paleontology", desc: "Fossils and history of life on Earth." },
+    { name: "Paleoentomology", desc: "Study of fossilized insects and arthropods." },
+    { name: "Geomorphology", desc: "Origin and evolution of landforms." },
+    { name: "Sedimentology", desc: "Formation and deposition of sediments and sedimentary rocks." },
+    { name: "Hydrogeology", desc: "Distribution and movement of groundwater." },
+    { name: "Geochronology", desc: "Age determination of rocks and geological events." },
+    { name: "Soil Science (Pedology)", desc: "Formation, classification, and properties of soils." },
+    { name: "Glaciology", desc: "Glaciers, ice sheets, and their role in climate and landscapes." },
+    { name: "Speleology", desc: "Caves, karst features, and their formation and biology." },
+    { name: "Structural Geology", desc: "Rock deformation and the architecture of mountain belts." },
+    { name: "Engineering Geology", desc: "Geological assessment for engineering projects." },
+    { name: "Geomicrobiology", desc: "Role of microorganisms in geological processes." },
+    { name: "Economic Geology", desc: "Formation and distribution of mineral resources." },
+    { name: "Quaternary Science", desc: "Recent geological history including ice ages and human origins." },
+    { name: "Astrogeology", desc: "Geology of planets, moons, and other solar system bodies." },
+    { name: "Taphonomy", desc: "How organisms become fossilized and the fossil record bias." },
+    { name: "Coastal & Marine Geology", desc: "Geology of shorelines and ocean floors." },
+    { name: "Stratigraphy", desc: "Order and age of rock layers through geological time." },
+    { name: "Biostratigraphy", desc: "Using fossils to date and correlate rock layers." },
+    { name: "Paleogeography", desc: "Reconstruction of past positions of continents and oceans." },
+    { name: "Geomorphometry", desc: "Quantitative analysis of landforms and terrain." }
+  ];
+
+  // ---- ATMOSPHERIC & OCEAN SCIENCES (Complete) ----
+  var ATMOS_OCEAN = [
+    { name: "Meteorology", desc: "Short-term atmospheric conditions and weather formation." },
+    { name: "Climatology", desc: "Long-term patterns in weather and climate change." },
+    { name: "Atmospheric Chemistry", desc: "Chemical composition of the atmosphere and air pollution." },
+    { name: "Atmospheric Physics", desc: "Physical processes in the atmosphere." },
+    { name: "Synoptic Meteorology", desc: "Large-scale weather patterns and frontal systems." },
+    { name: "Tropical Meteorology", desc: "Tropical atmospheric dynamics and cyclones." },
+    { name: "Paleoclimatology", desc: "Reconstruction of past climates using proxy records." },
+    { name: "Oceanography", desc: "Physical, chemical, biological, and geological aspects of oceans." },
+    { name: "Physical Oceanography", desc: "Ocean currents, waves, tides, and heat transfer." },
+    { name: "Chemical Oceanography", desc: "Chemical composition of oceans and carbon cycling." },
+    { name: "Biological Oceanography", desc: "Marine organisms and ocean productivity." },
+    { name: "Marine Meteorology", desc: "Atmospheric conditions over oceans." },
+    { name: "Hydrology", desc: "Movement and distribution of water across land." },
+    { name: "Limnology", desc: "Biology and chemistry of freshwater lakes and rivers." },
+    { name: "Ecohydrology", desc: "Interaction between water cycles and ecosystems." },
+    { name: "Dendroclimatology", desc: "Climate reconstruction from tree rings." },
+    { name: "Aeronomy", desc: "Upper atmosphere chemistry and dynamics." },
+    { name: "Cryosphere Science", desc: "Ice, snow, and permafrost systems." },
+    { name: "Remote Sensing", desc: "Satellite and airborne observation of Earth." }
+  ];
+
+  // ---- GEOPHYSICS (Complete) ----
+  var GEOPHYSICS = [
+    { name: "Geodesy", desc: "Measurement of Earth's size, shape, and gravitational field." },
+    { name: "Paleomagnetism", desc: "Earth's magnetic history recorded in rocks." },
+    { name: "Tectonophysics", desc: "Forces and mechanics driving plate tectonics." },
+    { name: "Exploration Geophysics", desc: "Subsurface mapping for mineral and oil exploration." },
+    { name: "Volcanophysics", desc: "Physical processes in volcanoes and eruption forecasting." }
+  ];
+
+  // ---- ASTRONOMY & ASTROPHYSICS (Complete) ----
+  var ASTRONOMY = [
+    { name: "Observational Astronomy", desc: "Detection and measurement of celestial objects." },
+    { name: "Astrophysics", desc: "Physics of stars, galaxies, and cosmic objects." },
+    { name: "Stellar Astronomy", desc: "Properties, life cycles, and evolution of stars." },
+    { name: "Solar Physics", desc: "The Sun, its magnetic activity, and solar-terrestrial effects." },
+    { name: "Galactic & Extragalactic Astronomy", desc: "Structure and evolution of galaxies." },
+    { name: "Cosmology", desc: "Origin, evolution, and large-scale structure of the universe." },
+    { name: "Planetary Science", desc: "Planets, moons, asteroids, and planetary system formation." },
+    { name: "Exoplanetology", desc: "Detection and characterization of planets around other stars." },
+    { name: "Astrobiology", desc: "Origin and potential existence of life in the universe." },
+    { name: "Radio Astronomy", desc: "Detection of radio waves from cosmic sources." },
+    { name: "Infrared & Submillimetre Astronomy", desc: "Cool objects and distant galaxies in infrared light." },
+    { name: "High-Energy Astrophysics", desc: "X-rays, gamma rays, and energetic cosmic phenomena." },
+    { name: "Gravitational Wave Astronomy", desc: "Detection of spacetime ripples from cosmic events." },
+    { name: "Neutrino Astronomy", desc: "Detection of neutrinos from cosmic sources." },
+    { name: "Astrometry", desc: "Precise measurement of stellar positions and motions." },
+    { name: "Space Physics", desc: "Plasma, magnetic fields, and radiation in space." },
+    { name: "Multi-Messenger Astronomy", desc: "Combining gravitational waves, light, and particles." },
+    { name: "Computational Astrophysics", desc: "Numerical simulation of astrophysical systems." },
+    { name: "Dark Matter & Dark Energy Research", desc: "Investigation of invisible universe components." },
+    { name: "Astroparticle Physics", desc: "High-energy cosmic rays and particles." },
+    { name: "Interstellar Medium Studies", desc: "Gas, dust, and radiation between stars." },
+    { name: "Time-Domain Astronomy", desc: "Transient events and time-variable phenomena." }
+  ];
+
+  // ---- LIFE SCIENCES - Core Biology Fields (Complete & Deduplicated) ----
+  var LIFE_SCIENCES_CORE = [
+    { name: "Botany", desc: "Structure, growth, and ecology of plants." },
+    { name: "Zoology", desc: "Biology, behavior, and evolution of animals." },
+    { name: "Microbiology", desc: "Bacteria, archaea, and microorganisms." },
+    { name: "Mycology", desc: "Fungi including yeasts and mushrooms." },
+    { name: "Genetics", desc: "Genes, heredity, and genetic variation." },
+    { name: "Molecular Biology", desc: "DNA, RNA, and protein synthesis." },
+    { name: "Cell Biology", desc: "Structure and function of cells." },
+    { name: "Developmental Biology", desc: "Growth from single cell to complex organism." },
+    { name: "Physiology", desc: "Function of organisms, organs, and tissues." },
+    { name: "Anatomy", desc: "Physical structure of organisms." },
+    { name: "Immunology", desc: "Immune system and defense against pathogens." },
+    { name: "Neuroscience", desc: "Brain, nervous system, and behavior." },
+    { name: "Ecology", desc: "Organisms, interactions, and ecosystems." },
+    { name: "Aquatic Ecology", desc: "Ecology of freshwater and saltwater environments." },
+    { name: "Marine Ecology", desc: "Ecological relationships in ocean systems." },
+    { name: "Plant Ecology", desc: "Distribution and interactions of plants." },
+    { name: "Evolutionary Biology", desc: "Evolution, natural selection, and adaptation." },
+    { name: "Population Genetics", desc: "Genetic variation and change in populations." },
+    { name: "Behavioral Genetics", desc: "Genetic basis of behavior." },
+    { name: "Evolutionary Developmental Biology (Evo-Devo)", desc: "How development evolves to create body plans." },
+    { name: "Taxonomy & Systematics", desc: "Classification and evolutionary relationships of organisms." },
+    { name: "Phylogenetics", desc: "Evolutionary relationships using genetic and morphological data." },
+    { name: "Biogeography", desc: "Geographic distribution of species." },
+    { name: "Marine Biology", desc: "Organisms and ecology of saltwater environments." },
+    { name: "Virology", desc: "Viruses and viral infections." },
+    { name: "Entomology", desc: "Biology and classification of insects." },
+    { name: "Ornithology", desc: "Biology and behavior of birds." },
+    { name: "Herpetology", desc: "Reptiles and amphibians." },
+    { name: "Ichthyology", desc: "Fish biology and classification." },
+    { name: "Mammalogy", desc: "Diversity and biology of mammals." },
+    { name: "Primatology", desc: "Biology, behavior, and evolution of primates." },
+    { name: "Cetology", desc: "Whales, dolphins, and porpoises." },
+    { name: "Arachnology", desc: "Spiders, scorpions, and arachnids." },
+    { name: "Carcinology", desc: "Crustaceans and their biology." },
+    { name: "Malacology", desc: "Mollusks and their classification." },
+    { name: "Lepidopterology", desc: "Butterflies and moths." },
+    { name: "Acarology", desc: "Mites and ticks." },
+    { name: "Nematology", desc: "Roundworms and their ecology." },
+    { name: "Parasitology", desc: "Parasites and parasitic relationships." },
+    { name: "Ethology", desc: "Animal behavior from evolutionary perspective." },
+    { name: "Behavioral Ecology", desc: "Adaptive significance of behavior." },
+    { name: "Bioinformatics", desc: "Computational tools for biological data." },
+    { name: "Computational Biology", desc: "Mathematical models of biological systems." },
+    { name: "Mathematical Biology", desc: "Mathematical analysis of biological problems." },
+    { name: "Systems Biology", desc: "Complex interactions in biological networks." },
+    { name: "Structural Biology", desc: "Three-dimensional structures of biological molecules." },
+    { name: "Proteomics", desc: "Complete set of proteins in a system." },
+    { name: "Genomics", desc: "Complete set of genes in an organism." },
+    { name: "Functional Genomics", desc: "Gene function at genome-wide scale." },
+    { name: "Transcriptomics", desc: "All RNA molecules expressed in a system." },
+    { name: "Metabolomics", desc: "Complete set of small molecules in a system." },
+    { name: "Epigenetics", desc: "Heritable changes in gene expression." },
+    { name: "Radiation Biology", desc: "Effects of radiation on living organisms." },
+    { name: "Cryobiology", desc: "Effects of low temperatures on organisms." },
+    { name: "Chronobiology", desc: "Biological rhythms and internal clocks." },
+    { name: "Photobiology", desc: "Effects of light on organisms." },
+    { name: "Extremophile Biology", desc: "Organisms thriving in extreme conditions." },
+    { name: "Soil Biology", desc: "Microorganisms and fauna in soil." },
+    { name: "Chemical Ecology", desc: "Chemical signals in organism interactions." },
+    { name: "Comparative Physiology", desc: "Physiology across diverse animal groups." },
+    { name: "Biomechanics", desc: "Mechanics of living organisms." },
+    { name: "Paleoecology", desc: "Reconstructed ecology of past organisms." },
+    { name: "Paleobiology", desc: "Biology of extinct organisms." },
+    { name: "Trophic Ecology", desc: "Food webs and energy flow." },
+    { name: "Landscape Ecology", desc: "Ecology at landscape scales." },
+    { name: "Community Ecology", desc: "Assembly and diversity of communities." },
+    { name: "Ecosystem Ecology", desc: "Energy and nutrient cycling in systems." },
+    { name: "Restoration Ecology", desc: "Restoration of degraded ecosystems." },
+    { name: "Applied Ecology", desc: "Conservation and environmental management." },
+    { name: "Invasion Biology", desc: "Non-native species and their impacts." },
+    { name: "Macroecology", desc: "Large-scale patterns in ecology." },
+    { name: "Limnobiology", desc: "Biology of freshwater systems." },
+    { name: "Bryology", desc: "Mosses and liverworts." },
+    { name: "Phycology", desc: "Algae and their classification." },
+    { name: "Lichenology", desc: "Lichens and symbiotic relationships." },
+    { name: "Dendrology", desc: "Trees and woody plant identification." },
+    { name: "Ethnobotany", desc: "Relationships between cultures and plants." },
+    { name: "Palynology", desc: "Pollen and spores." },
+    { name: "Geobiology", desc: "Interactions between life and geology." },
+    { name: "Symbiology", desc: "Symbiotic and mutualistic relationships." },
+    { name: "Neuroethology", desc: "Neural mechanisms of behavior." },
+    { name: "Connectomics", desc: "Complete neural circuit mapping." },
+    { name: "Aerobiology", desc: "Airborne organisms and particles." },
+    { name: "Conservation Genetics", desc: "Genetic approaches to conservation." },
+    { name: "Phenology", desc: "Timing of seasonal biological events." },
+    { name: "Reproductive Biology", desc: "Biological processes of reproduction." },
+    { name: "Endocrinology (Biological)", desc: "Hormones and physiological regulation." },
+    { name: "Histology", desc: "Microscopic structure of tissues." },
+    { name: "Cytology", desc: "Structure and function of individual cells." },
+    { name: "Molecular Ecology", desc: "Molecular techniques in ecology." }
+  ];
+
+  // ---- FORMAL SCIENCES ----
+  var MATHEMATICS = [
+    { name: "Algebra", desc: "Equations, symbols, and abstract structures." },
+    { name: "Geometry", desc: "Properties and relationships of shapes and spaces." },
+    { name: "Calculus & Mathematical Analysis", desc: "Continuous change, derivatives, and limits." },
+    { name: "Number Theory", desc: "Properties of integers and prime numbers." },
+    { name: "Topology", desc: "Properties of space under continuous deformation." },
+    { name: "Combinatorics", desc: "Counting and arrangement of objects." },
+    { name: "Probability Theory", desc: "Mathematical framework for randomness." },
+    { name: "Statistics", desc: "Data collection, analysis, and interpretation." },
+    { name: "Discrete Mathematics", desc: "Structures that are fundamentally discrete." },
+    { name: "Differential Equations", desc: "Equations relating quantities to rates of change." },
+    { name: "Numerical Analysis", desc: "Algorithms for approximating mathematical solutions." },
+    { name: "Mathematical Logic", desc: "Formal logical systems and proof theory." },
+    { name: "Game Theory", desc: "Mathematical models of strategic interaction." },
+    { name: "Abstract Algebra", desc: "Groups, rings, fields, and modules." },
+    { name: "Real Analysis", desc: "Rigorous foundations of calculus." },
+    { name: "Complex Analysis", desc: "Functions of complex numbers." },
+    { name: "Functional Analysis", desc: "Infinite-dimensional spaces and operators." },
+    { name: "Measure Theory", desc: "Rigorous foundations for integration and probability." },
+    { name: "Set Theory", desc: "Foundations of mathematics via sets." },
+    { name: "Category Theory", desc: "Abstract mathematical structures and their mappings." },
+    { name: "Algebraic Geometry", desc: "Geometry defined by polynomial equations." },
+    { name: "Differential Geometry", desc: "Calculus on curves and surfaces." },
+    { name: "Knot Theory", desc: "Mathematical properties of knots." },
+    { name: "Optimization Theory", desc: "Finding best solutions in constrained problems." },
+    { name: "Operations Research", desc: "Mathematical methods for decision-making." },
+    { name: "Actuarial Science", desc: "Risk assessment in insurance and finance." },
+    { name: "Control Theory", desc: "Design of feedback systems." },
+    { name: "Dynamical Systems Theory", desc: "Evolution of systems over time." }
+  ];
+
+  var LOGIC_FORMAL = [
+    { name: "Formal Logic", desc: "Symbolic structure of arguments." },
+    { name: "Computational Logic", desc: "Logic applied to computing and automation." },
+    { name: "Modal Logic", desc: "Logic of necessity and possibility." },
+    { name: "Temporal Logic", desc: "Logic of propositions changing over time." },
+    { name: "Proof Theory", desc: "Structure and properties of formal proofs." },
+    { name: "Model Theory", desc: "Relationship between theories and mathematical structures." },
+    { name: "Paraconsistent Logic", desc: "Logical systems tolerating contradictions." }
+  ];
+
+  var COMPUTER_SCIENCE = [
+    { name: "Algorithms & Data Structures", desc: "Efficient procedures and data organization." },
+    { name: "Computational Complexity Theory", desc: "What problems can be computed and how efficiently." },
+    { name: "Theory of Computation", desc: "Fundamental capabilities and limits of computers." },
+    { name: "Automata Theory", desc: "Abstract computational models." },
+    { name: "Formal Languages & Parsing", desc: "Syntax and structure of languages." },
+    { name: "Artificial Intelligence", desc: "Systems that perform intelligent tasks." },
+    { name: "Machine Learning", desc: "Algorithms that learn from data." },
+    { name: "Deep Learning & Neural Networks", desc: "Multi-layered neural network models." },
+    { name: "Natural Language Processing", desc: "Computational processing of human language." },
+    { name: "Computer Vision", desc: "Machine interpretation of visual information." },
+    { name: "Robotics", desc: "Design and control of automated machines." },
+    { name: "Software Engineering", desc: "Design, development, and maintenance of software." },
+    { name: "Programming Language Theory", desc: "Design and implementation of languages." },
+    { name: "Computer Networks", desc: "Communication between computers." },
+    { name: "Cybersecurity", desc: "Protection of systems and data." },
+    { name: "Cryptography", desc: "Secure communication and information protection." },
+    { name: "Database Systems", desc: "Storage and querying of structured data." },
+    { name: "Human-Computer Interaction", desc: "Design of usable interfaces." },
+    { name: "Computer Graphics", desc: "Generation and rendering of images." },
+    { name: "Computer Architecture", desc: "Design of computer hardware." },
+    { name: "Operating Systems", desc: "Software managing hardware resources." },
+    { name: "Distributed & Parallel Computing", desc: "Computation across multiple processors." },
+    { name: "Cloud Computing", desc: "Computing via internet-accessible resources." },
+    { name: "Quantum Computing", desc: "Computation exploiting quantum mechanics." },
+    { name: "Formal Methods & Verification", desc: "Mathematical verification of correctness." },
+    { name: "Augmented & Virtual Reality", desc: "Immersive digital environments." },
+    { name: "Evolutionary Computation", desc: "Algorithms inspired by biological evolution." },
+    { name: "Scientific Computing", desc: "Algorithms for scientific problems." },
+    { name: "Geoinformatics", desc: "Computational methods for geographic data." },
+    { name: "Health Informatics", desc: "Information science applied to healthcare." },
+    { name: "Bioinformatics", desc: "Computational tools for biological data." }
+  ];
+
+  var SYSTEMS_SCIENCE = [
+    { name: "Systems Theory", desc: "Framework for analyzing complex systems." },
+    { name: "Cybernetics", desc: "Feedback and control in systems." },
+    { name: "Information Theory", desc: "Quantification and communication of information." },
+    { name: "Complexity Science", desc: "Emergent behavior in systems of many parts." },
+    { name: "Agent-Based Modeling", desc: "Simulation through autonomous agents." },
+    { name: "Network Science", desc: "Structure and dynamics of complex networks." }
+  ];
+
+  var PHILOSOPHY_FORMAL = [
+    { name: "Epistemology", desc: "Nature and sources of knowledge." },
+    { name: "Ontology & Metaphysics", desc: "Nature of reality and existence." },
+    { name: "Philosophy of Science", desc: "Foundations and methods of science." },
+    { name: "Philosophy of Mathematics", desc: "Nature of mathematical objects and truth." },
+    { name: "Philosophy of Mind", desc: "Nature of consciousness and mental states." },
+    { name: "Philosophy of Language", desc: "Meaning, reference, and truth in language." },
+    { name: "Logic (Philosophical)", desc: "Principles of correct reasoning." },
+    { name: "Ethics", desc: "Morality and how we ought to live." },
+    { name: "Aesthetics", desc: "Nature of beauty, art, and taste." },
+    { name: "Political Philosophy", desc: "Justice, authority, and governance." }
+  ];
+
+  // ---- SOCIAL SCIENCES ----
+  var PSYCHOLOGY = [
+    { name: "Cognitive Psychology", desc: "Mental processes of perception, attention, and memory." },
+    { name: "Behavioral Psychology", desc: "Observable behavior shaped by environment." },
+    { name: "Developmental Psychology", desc: "Growth and development across lifespan." },
+    { name: "Personality Psychology", desc: "Stable patterns of thought and behavior." },
+    { name: "Social Psychology", desc: "How people are influenced by others." },
+    { name: "Clinical Psychology", desc: "Assessment and treatment of mental disorders." },
+    { name: "Neuropsychology", desc: "Relationship between brain and behavior." },
+    { name: "Psychometrics", desc: "Development and validation of psychological tests." },
+    { name: "Evolutionary Psychology", desc: "Psychological traits as evolutionary adaptations." },
+    { name: "Health Psychology", desc: "Psychological factors in health and illness." },
+    { name: "Forensic Psychology", desc: "Psychology applied to legal systems." },
+    { name: "Industrial & Organizational Psychology", desc: "Psychology in workplace settings." },
+    { name: "Educational Psychology", desc: "Learning, motivation, and instruction." },
+    { name: "Positive Psychology", desc: "Strengths, well-being, and flourishing." },
+    { name: "Cultural Psychology", desc: "How culture and mind shape each other." },
+    { name: "Comparative Psychology", desc: "Animal behavior in relation to human psychology." },
+    { name: "Trauma Psychology", desc: "Impact of traumatic experiences and recovery." }
+  ];
+
+  var SOCIOLOGY = [
+    { name: "Criminology", desc: "Crime, causes, and institutional responses." },
+    { name: "Demography", desc: "Population size, structure, and dynamics." },
+    { name: "Urban Sociology", desc: "Social life in cities." },
+    { name: "Rural Sociology", desc: "Social organization in rural communities." },
+    { name: "Sociology of Religion", desc: "Religion as social institution." },
+    { name: "Economic Sociology", desc: "Social dimensions of economic systems." },
+    { name: "Cultural Sociology", desc: "How culture shapes social life." },
+    { name: "Political Sociology", desc: "Social bases of political power." },
+    { name: "Environmental Sociology", desc: "Human societies and natural environment." },
+    { name: "Gender Studies", desc: "Social construction of gender." },
+    { name: "Organizational Sociology", desc: "Structure and dynamics of organizations." },
+    { name: "Family Sociology", desc: "Institution of family and relationships." },
+    { name: "Sociology of Education", desc: "Education as social institution." }
+  ];
+
+  var ANTHROPOLOGY = [
+    { name: "Cultural Anthropology", desc: "Diversity of human cultures and societies." },
+    { name: "Biological & Physical Anthropology", desc: "Human biological evolution and variation." },
+    { name: "Archaeology", desc: "Past human societies through material remains." },
+    { name: "Linguistic Anthropology", desc: "Language and culture." },
+    { name: "Medical Anthropology", desc: "Biological, social, and cultural aspects of health." },
+    { name: "Economic Anthropology", desc: "Economic systems embedded in culture." },
+    { name: "Environmental Anthropology", desc: "Human-environment relationships." },
+    { name: "Cognitive Anthropology", desc: "Culture and thought." },
+    { name: "Forensic Anthropology", desc: "Skeletal analysis for legal purposes." },
+    { name: "Paleoanthropology", desc: "Human ancestors through fossil record." },
+    { name: "Ethnoarchaeology", desc: "Living societies to interpret archaeology." },
+    { name: "Anthrozoology", desc: "Human-animal relationships." },
+    { name: "Ethnobiology", desc: "Relationships between cultures and organisms." },
+    { name: "Applied Anthropology", desc: "Anthropology applied to practical problems." }
+  ];
+
+  var ECONOMICS = [
+    { name: "Microeconomics", desc: "Individual decisions and market interactions." },
+    { name: "Macroeconomics", desc: "Economy-wide growth and policy." },
+    { name: "Econometrics", desc: "Statistical methods in economics." },
+    { name: "Behavioral Economics", desc: "Psychological insights into economic decisions." },
+    { name: "Development Economics", desc: "Economic growth in lower-income countries." },
+    { name: "Labor Economics", desc: "Employment, wages, and labor markets." },
+    { name: "Financial Economics", desc: "Asset pricing and financial markets." },
+    { name: "Health Economics", desc: "Healthcare production and financing." },
+    { name: "Environmental Economics", desc: "Environment and economic incentives." },
+    { name: "Urban & Regional Economics", desc: "Geographic distribution of economic activity." },
+    { name: "International Economics", desc: "Trade and capital flows between nations." },
+    { name: "Monetary Economics", desc: "Money, banking, and monetary policy." },
+    { name: "Public Finance", desc: "Taxation and government spending." },
+    { name: "History of Economic Thought", desc: "Evolution of economic ideas." },
+    { name: "Neuroeconomics", desc: "Neuroscience insights into economic decisions." },
+    { name: "Ecological Economics", desc: "Economy within natural systems." },
+    { name: "Institutional Economics", desc: "Role of institutions in economy." },
+    { name: "Computational Economics", desc: "Simulation and modeling of economies." },
+    { name: "Political Economy", desc: "Interplay of politics and economy." }
+  ];
+
+  var POLITICAL_SCIENCE = [
+    { name: "Comparative Politics", desc: "Political systems across nations." },
+    { name: "International Relations", desc: "Relations between nations." },
+    { name: "Public Policy", desc: "Design and evaluation of policies." },
+    { name: "Political Theory & Philosophy", desc: "Foundational concepts and normative arguments." },
+    { name: "Electoral Studies", desc: "Voting behavior and electoral systems." },
+    { name: "Security Studies", desc: "War, peace, and military affairs." },
+    { name: "Global Governance", desc: "International institutions and cooperation." }
+  ];
+
+  var LINGUISTICS = [
+    { name: "Phonetics & Phonology", desc: "Sounds of language." },
+    { name: "Morphology", desc: "Structure of words." },
+    { name: "Syntax", desc: "Rules for combining words." },
+    { name: "Semantics", desc: "Meaning in language." },
+    { name: "Pragmatics", desc: "Context and meaning." },
+    { name: "Discourse Analysis", desc: "Language above the sentence level." },
+    { name: "Sociolinguistics", desc: "Language variation by social factors." },
+    { name: "Historical Linguistics", desc: "Language change over time." },
+    { name: "Comparative Linguistics", desc: "Language families and relationships." },
+    { name: "Computational Linguistics", desc: "Computational models of language." },
+    { name: "Psycholinguistics", desc: "Mental processes in language." },
+    { name: "Neurolinguistics", desc: "Brain basis of language." },
+    { name: "Forensic Linguistics", desc: "Language analysis for legal contexts." },
+    { name: "Dialectology", desc: "Regional language varieties." },
+    { name: "Etymology", desc: "Origins and development of words." },
+    { name: "Applied Linguistics", desc: "Language teaching and policy." },
+    { name: "Lexicology & Lexicography", desc: "Vocabulary and dictionary-making." },
+    { name: "Semiotics", desc: "Signs, symbols, and meaning." },
+    { name: "Philology", desc: "Study of historical texts." }
+  ];
+
+  var HUMAN_GEOGRAPHY = [
+    { name: "Cartography", desc: "Design and creation of maps." },
+    { name: "Geographic Information Systems (GIS)", desc: "Spatial data capture and analysis." },
+    { name: "Economic Geography", desc: "Geographic distribution of economic activity." },
+    { name: "Political Geography", desc: "Territory, borders, and state power." },
+    { name: "Cultural Geography", desc: "Culture and landscape." },
+    { name: "Population Geography", desc: "Distribution and migration of people." },
+    { name: "Urban Geography", desc: "Cities and urbanization." },
+    { name: "Rural Geography", desc: "Rural areas and agriculture." },
+    { name: "Transportation Geography", desc: "Movement and logistics." },
+    { name: "Political Ecology", desc: "Politics of environment and resources." }
+  ];
+
+  var EDUCATION = [
+    { name: "Curriculum Studies", desc: "Design and organization of educational content." },
+    { name: "Pedagogy & Teaching Methods", desc: "How to teach effectively." },
+    { name: "Educational Technology", desc: "Digital tools in education." },
+    { name: "Comparative Education", desc: "Educational systems across cultures." },
+    { name: "Philosophy of Education", desc: "Aims and values of education." },
+    { name: "Special Education", desc: "Instruction for students with special needs." },
+    { name: "Higher Education Studies", desc: "Universities and tertiary institutions." },
+    { name: "Educational Assessment", desc: "Testing and evaluation of learning." }
+  ];
+
+  var COMMUNICATION = [
+    { name: "Mass Communication", desc: "Communication to large audiences." },
+    { name: "Interpersonal Communication", desc: "Communication between individuals." },
+    { name: "Media Studies", desc: "Media forms, content, and effects." },
+    { name: "Organizational Communication", desc: "Information flow in organizations." },
+    { name: "Intercultural Communication", desc: "Communication across cultures." },
+    { name: "Health Communication", desc: "Communication for health promotion." },
+    { name: "Science Communication", desc: "Communication of science to public." }
+  ];
+
+  var LAW = [
+    { name: "Jurisprudence", desc: "Philosophy and theory of law." },
+    { name: "Constitutional Law", desc: "Fundamental legal frameworks." },
+    { name: "International Law", desc: "Laws between nations." },
+    { name: "Criminal Law", desc: "Laws defining crimes." },
+    { name: "Civil Law", desc: "Laws between individuals and organizations." },
+    { name: "Environmental Law", desc: "Laws protecting environment." },
+    { name: "Family Law", desc: "Marriage, divorce, custody." },
+    { name: "Employment Law", desc: "Worker rights and regulations." },
+    { name: "Intellectual Property Law", desc: "Patents, copyrights, trademarks." },
+    { name: "Comparative Law", desc: "Legal systems compared." }
+  ];
+
+  var HISTORY = [
+    { name: "Ancient History", desc: "Civilizations of the ancient world." },
+    { name: "Medieval History", desc: "European Middle Ages." },
+    { name: "Modern History", desc: "From Renaissance to present." },
+    { name: "Contemporary History", desc: "Recent historical periods." },
+    { name: "Social History", desc: "Everyday life of ordinary people." },
+    { name: "Political History", desc: "History of government and power." },
+    { name: "Economic History", desc: "History of economies and trade." },
+    { name: "Intellectual History", desc: "History of ideas." },
+    { name: "Cultural History", desc: "History of culture and society." },
+    { name: "Military History", desc: "Wars and military institutions." },
+    { name: "Environmental History", desc: "History of human-environment relations." },
+    { name: "Women's History", desc: "History from women's perspectives." },
+    { name: "Public History", desc: "History for public audiences." },
+    { name: "World History", desc: "History at global scale." }
+  ];
+
+  // ---- APPLIED SCIENCES & ENGINEERING ----
+  var ENGINEERING = [
+    { name: "Civil Engineering", desc: "Infrastructure, buildings, and structures." },
+    { name: "Mechanical Engineering", desc: "Machines, engines, and mechanisms." },
+    { name: "Electrical Engineering", desc: "Electricity, electronics, and power." },
+    { name: "Electronics Engineering", desc: "Electronic circuits and components." },
+    { name: "Chemical Engineering", desc: "Chemical processes at industrial scale." },
+    { name: "Materials Science & Engineering", desc: "Structure and properties of materials." },
+    { name: "Metallurgy", desc: "Production and properties of metals." },
+    { name: "Aerospace Engineering", desc: "Aircraft and spacecraft." },
+    { name: "Automotive Engineering", desc: "Vehicles and transportation." },
+    { name: "Biomedical Engineering", desc: "Engineering applied to medicine." },
+    { name: "Environmental Engineering", desc: "Solutions to environmental problems." },
+    { name: "Water & Sanitation Engineering", desc: "Water treatment and waste management." },
+    { name: "Industrial & Systems Engineering", desc: "Optimization of processes and supply chains." },
+    { name: "Nuclear Engineering", desc: "Nuclear reactors and radiation." },
+    { name: "Agricultural Engineering", desc: "Machinery and systems for farming." },
+    { name: "Petroleum Engineering", desc: "Oil and gas extraction." },
+    { name: "Mining Engineering", desc: "Extraction of minerals." },
+    { name: "Marine & Naval Engineering", desc: "Ships and offshore structures." },
+    { name: "Structural Engineering", desc: "Design of structures." },
+    { name: "Geotechnical Engineering", desc: "Soil and foundation design." },
+    { name: "Transportation Engineering", desc: "Roads, rail, and logistics." },
+    { name: "Genetic & Bioprocess Engineering", desc: "Biological and fermentation processes." },
+    { name: "Photonics Engineering", desc: "Light-based devices and systems." },
+    { name: "Mechatronics", desc: "Integration of mechanics and electronics." },
+    { name: "Thermal Engineering", desc: "Heat transfer and thermodynamics." },
+    { name: "Acoustical Engineering", desc: "Sound control and design." },
+    { name: "Textile Engineering", desc: "Fiber and fabric production." },
+    { name: "Fire Protection Engineering", desc: "Fire prevention and control." },
+    { name: "Corrosion Engineering", desc: "Prevention of material degradation." },
+    { name: "Reliability Engineering", desc: "Design for system dependability." }
+  ];
+
+  var AGRICULTURE = [
+    { name: "Agronomy", desc: "Crop production and soil management." },
+    { name: "Horticulture", desc: "Cultivation of fruits and vegetables." },
+    { name: "Animal Science", desc: "Biology and management of livestock." },
+    { name: "Food Science", desc: "Food composition and processing." },
+    { name: "Food Technology", desc: "Food preservation and safety." },
+    { name: "Forestry", desc: "Management of forests." },
+    { name: "Aquaculture", desc: "Farming of fish and aquatic plants." },
+    { name: "Agroecology", desc: "Ecological approaches to farming." },
+    { name: "Plant Pathology", desc: "Plant diseases and pest management." },
+    { name: "Entomology (Agricultural)", desc: "Insect pests in agriculture." },
+    { name: "Viticulture", desc: "Grape cultivation." },
+    { name: "Silviculture", desc: "Forest management and cultivation." },
+    { name: "Soil Engineering", desc: "Soil for engineering applications." }
+  ];
+
+  var ARCHITECTURE = [
+    { name: "Architecture", desc: "Design of buildings and structures." },
+    { name: "Landscape Architecture", desc: "Design of outdoor spaces." },
+    { name: "Urban Design", desc: "Design of cities and neighborhoods." },
+    { name: "Computational Design", desc: "Digital tools in design." },
+    { name: "Sustainable Architecture", desc: "Environmentally responsible design." },
+    { name: "Interior Architecture", desc: "Design of interior spaces." },
+    { name: "Heritage Conservation", desc: "Preservation of historic buildings." }
+  ];
+
+  var ENERGY = [
+    { name: "Renewable Energy Science", desc: "Solar, wind, and other clean energy." },
+    { name: "Energy Storage", desc: "Batteries and energy storage systems." },
+    { name: "Energy Policy & Economics", desc: "Energy systems and transitions." },
+    { name: "Nuclear Energy Science", desc: "Fission and fusion power." },
+    { name: "Geothermal Energy", desc: "Earth's heat for energy." },
+    { name: "Hydropower Engineering", desc: "Water-based energy systems." },
+    { name: "Smart Grids", desc: "Intelligent electrical distribution." }
+  ];
+
+  // ---- HEALTH & MEDICAL SCIENCES ----
+  var MEDICINE_SPECIALIZED = [
+    { name: "Internal Medicine", desc: "Diseases of organ systems." },
+    { name: "Cardiology", desc: "Heart and cardiovascular system." },
+    { name: "Neurology", desc: "Nervous system disorders." },
+    { name: "Psychiatry", desc: "Mental and behavioral disorders." },
+    { name: "Oncology", desc: "Cancer diagnosis and treatment." },
+    { name: "Pediatrics", desc: "Health of children and infants." },
+    { name: "Geriatrics", desc: "Health of older adults." },
+    { name: "Obstetrics & Gynecology", desc: "Pregnancy and women's health." },
+    { name: "Endocrinology", desc: "Hormonal disorders." },
+    { name: "Gastroenterology", desc: "Digestive system disorders." },
+    { name: "Nephrology", desc: "Kidney disorders." },
+    { name: "Dermatology", desc: "Skin disorders." },
+    { name: "Hematology", desc: "Blood and blood disorders." },
+    { name: "Rheumatology", desc: "Autoimmune and joint diseases." },
+    { name: "Immunology (Clinical)", desc: "Immune system disorders." },
+    { name: "Ophthalmology", desc: "Eye disorders." },
+    { name: "Otolaryngology (ENT)", desc: "Ear, nose, throat." },
+    { name: "Urology", desc: "Urinary and male reproductive." },
+    { name: "Pulmonology", desc: "Respiratory disorders." },
+    { name: "Anesthesiology", desc: "Anesthesia and perioperative care." },
+    { name: "Emergency Medicine", desc: "Acute and critical care." },
+    { name: "Physical Medicine & Rehabilitation", desc: "Restoration of function." },
+    { name: "Sports Medicine", desc: "Sports-related injuries." },
+    { name: "Palliative Care", desc: "Symptom relief in serious illness." },
+    { name: "Infectious Disease", desc: "Diseases caused by pathogens." },
+    { name: "Neonatology", desc: "Critical care of newborns." },
+    { name: "Surgery", desc: "Operative treatment." },
+    { name: "Trauma Surgery", desc: "Treatment of severe injuries." },
+    { name: "Vascular Surgery", desc: "Blood vessel surgery." },
+    { name: "Thoracic Surgery", desc: "Chest and lung surgery." },
+    { name: "Orthopedic Surgery", desc: "Bones and joints." },
+    { name: "Neurosurgery", desc: "Brain and spinal surgery." },
+    { name: "Otologic Surgery", desc: "Ear surgery." },
+    { name: "Plastic Surgery", desc: "Reconstructive and cosmetic surgery." },
+    { name: "Urologic Surgery", desc: "Surgical urologic conditions." },
+    { name: "Gynecologic Surgery", desc: "Surgical gynecologic conditions." },
+    { name: "Tropical Medicine", desc: "Diseases of tropical regions." },
+    { name: "Occupational Medicine", desc: "Work-related health issues." },
+    { name: "Military Medicine", desc: "Medical care in military contexts." },
+    { name: "Space Medicine", desc: "Physiological effects of spaceflight." },
+    { name: "Aviation Medicine", desc: "Medical aspects of aviation." },
+    { name: "Maritime Medicine", desc: "Medical care at sea." },
+    { name: "Forensic Medicine", desc: "Medicine applied to law enforcement." }
+  ];
+
+  var HEALTH_SCIENCES = [
+    { name: "Pharmacology", desc: "Drug interactions with biological systems." },
+    { name: "Clinical Pharmacology", desc: "Drug behavior in real patients." },
+    { name: "Toxicology", desc: "Harmful effects of chemicals." },
+    { name: "Nursing", desc: "Patient care and health promotion." },
+    { name: "Dentistry", desc: "Teeth and oral health." },
+    { name: "Veterinary Medicine", desc: "Health of animals." },
+    { name: "Epidemiology", desc: "Disease patterns in populations." },
+    { name: "Public Health", desc: "Community and population health." },
+    { name: "Global Health", desc: "Health across national borders." },
+    { name: "Nutrition Science", desc: "Food and health." },
+    { name: "Pathology", desc: "Disease diagnosis." },
+    { name: "Genomics (Medical)", desc: "Genetic basis of health." },
+    { name: "Personalized Medicine", desc: "Individualized medical treatment." },
+    { name: "Precision Medicine", desc: "Medicine tailored to individual characteristics." },
+    { name: "Translational Medicine", desc: "Lab discoveries to clinical application." },
+    { name: "Biomedical Research", desc: "Fundamental medical science." },
+    { name: "Regenerative Medicine", desc: "Tissue repair and replacement." },
+    { name: "Nanomedicine", desc: "Nanotechnology in medicine." },
+    { name: "Immunotherapy", desc: "Using immune system against disease." },
+    { name: "Gene Therapy", desc: "Treatment by genetic modification." },
+    { name: "Stem Cell Biology", desc: "Stem cells and their applications." },
+    { name: "Radiology", desc: "Medical imaging." },
+    { name: "Nuclear Medicine", desc: "Radioactive tracers in diagnosis." },
+    { name: "Psychosomatic Medicine", desc: "Mind-body relationships in health." },
+    { name: "Sexual Medicine", desc: "Sexual health and dysfunction." },
+    { name: "Sleep Medicine", desc: "Sleep disorders." },
+    { name: "Pain Medicine", desc: "Management and treatment of pain." },
+    { name: "Addiction Medicine", desc: "Treatment of substance abuse." },
+    { name: "Gerontology", desc: "Biology and science of aging." },
+    { name: "Naturopathic Medicine", desc: "Natural approaches to health." },
+    { name: "Homeopathy (History)", desc: "Historical medical system." },
+    { name: "Medical Informatics", desc: "Information systems in healthcare." },
+    { name: "Clinical Research Methodology", desc: "Design of clinical studies." },
+    { name: "Biostatistics", desc: "Statistics in biological research." },
+    { name: "Medical Ethics", desc: "Ethical issues in medicine." },
+    { name: "Health Policy", desc: "Government health decisions." }
+  ];
+
+  // ---- INTERDISCIPLINARY & EMERGING SCIENCES ----
+  var INTERDISCIPLINARY = [
+    { name: "Cognitive Science", desc: "Interdisciplinary study of the mind." },
+    { name: "Neuroscience Cluster", desc: "Multiple approaches to brain science",
+      children: [
+        { name: "Cognitive Neuroscience", desc: "How brain creates mental functions." },
+        { name: "Behavioral Neuroscience", desc: "Neural basis of behavior." },
+        { name: "Computational Neuroscience", desc: "Mathematical models of neural systems." },
+        { name: "Social Neuroscience", desc: "Neural basis of social behavior." },
+        { name: "Affective Neuroscience", desc: "Neuroscience of emotion." },
+        { name: "Neuroimaging Science", desc: "Visualization of brain structure and function." },
+        { name: "Clinical Neuroscience", desc: "Application to neurological disorders." }
+      ]
+    },
+    { name: "Biophysics", desc: "Physics principles in biological systems." },
+    { name: "Biochemistry", desc: "Chemistry of living organisms." },
+    { name: "Molecular Biophysics", desc: "Physics of biological molecules." },
+    { name: "Systems Biology", desc: "Networks in biological systems." },
+    { name: "Synthetic Biology", desc: "Design of biological systems." },
+    { name: "Astrobiology", desc: "Life beyond Earth." },
+    { name: "Exobiology", desc: "Possibility of life on other planets." },
+    { name: "Origin of Life Research", desc: "How life arose from chemistry." },
+    { name: "Quantum Biology", desc: "Quantum effects in biological processes." },
+    { name: "Extremophile Biology", desc: "Life in extreme conditions." },
+    { name: "Thermophile Chemistry", desc: "Chemistry at extreme temperatures." },
+    { name: "Data Science", desc: "Extraction of insight from data." },
+    { name: "Big Data Analytics", desc: "Analysis of massive datasets." },
+    { name: "Network Science", desc: "Structure and dynamics of networks." },
+    { name: "Complexity Science", desc: "Emergent complexity." },
+    { name: "Nanotechnology", desc: "Manipulation at atomic scale." },
+    { name: "Nanoarchitectonics", desc: "Design of nanomaterials." },
+    { name: "Graphene Science", desc: "Properties and applications of graphene." },
+    { name: "Forensic Science", desc: "Scientific evidence in legal contexts." },
+    { name: "Forensic Anthropology", desc: "Bone analysis for forensics." },
+    { name: "Forensic Entomology", desc: "Insect evidence in forensics." },
+    { name: "Forensic Genetics", desc: "DNA analysis for forensics." },
+    { name: "Digital Forensics", desc: "Computer and digital evidence." },
+    { name: "Sports Science", desc: "Performance and training." },
+    { name: "Exercise Science", desc: "Physiological effects of exercise." },
+    { name: "Human Factors & Ergonomics", desc: "Design for human capabilities." },
+    { name: "Occupational Health & Safety", desc: "Workplace safety science." },
+    { name: "Gerontology", desc: "Science of aging." },
+    { name: "Library & Information Science", desc: "Information organization and retrieval." },
+    { name: "Climate Science", desc: "Earth's climate system." },
+    { name: "Conservation Biology", desc: "Biodiversity protection." },
+    { name: "Restoration Ecology", desc: "Ecosystem restoration." },
+    { name: "Science, Technology & Society (STS)", desc: "Social context of science." },
+    { name: "Urban Planning & Urban Science", desc: "Design and analysis of cities." },
+    { name: "History of Science", desc: "Evolution of scientific knowledge." },
+    { name: "Philosophy of Science", desc: "Foundations of science." },
+    { name: "Bioethics", desc: "Ethics of biological research." },
+    { name: "Neuroethics", desc: "Ethics of neurotechnology." },
+    { name: "Neurolaw", desc: "Neuroscience in legal contexts." },
+    { name: "Human Ecology", desc: "Human-environment relationships." },
+    { name: "Computational Social Science", desc: "Computation applied to social science." },
+    { name: "Econophysics", desc: "Physics methods in economics." },
+    { name: "Sociophysics", desc: "Physics methods in sociology." },
+    { name: "Peace & Conflict Studies", desc: "Understanding violence and peace." },
+    { name: "Risk Science", desc: "Assessment and management of risk." },
+    { name: "Disaster Science", desc: "Natural and human-made disasters." },
+    { name: "Environmental Humanities", desc: "Humanities perspectives on environment." },
+    { name: "Psychophysics", desc: "Relationship between stimuli and sensation." },
+    { name: "Archaeoastronomy", desc: "Astronomy in ancient cultures." },
+    { name: "Archaeometry", desc: "Scientific analysis of artifacts." },
+    { name: "Geoarchaeology", desc: "Geoscience in archaeology." },
+    { name: "Digital Humanities", desc: "Digital tools in humanities." },
+    { name: "Science Communication", desc: "Communication of science to public." },
+    { name: "Pharmacogenomics", desc: "Genetic variation in drug response." },
+    { name: "Metagenomics", desc: "Genetic material from environmental samples." },
+    { name: "Optogenetics", desc: "Light control of neurons." },
+    { name: "Nutrigenomics", desc: "Gene-nutrient interactions." },
+    { name: "Nutrient Science", desc: "Effects of nutrients on biology." },
+    { name: "Epigenetic Science", desc: "Gene regulation mechanisms." },
+    { name: "Cliodynamics", desc: "Mathematical modeling of history." },
+    { name: "Scientometrics & Bibliometrics", desc: "Measurement of scientific output." },
+    { name: "Paleoneurobiology", desc: "Evolution of brains." },
+    { name: "Sustainability Science", desc: "Science of sustainable systems." },
+    { name: "Xenobiology", desc: "Life with non-standard chemistry." },
+    { name: "Astroecology", desc: "Ecology of extraterrestrial environments." },
+    { name: "Neurogenetics", desc: "Genetic basis of nervous systems." },
+    { name: "Synthetic Genomics", desc: "Design of entire genomes." },
+    { name: "Lipidomics", desc: "Study of lipid molecules." },
+    { name: "Glycomics", desc: "Study of sugar molecules." },
+    { name: "Proteomics", desc: "Study of all proteins." },
+    { name: "Single-Cell Biology", desc: "Analysis of individual cells." },
+    { name: "Cognitive Archaeology", desc: "Evolution of human cognition." },
+    { name: "Science Policy", desc: "Government and scientific research." },
+    { name: "Futurology & Futures Studies", desc: "Study of possible futures." },
+    { name: "Metrology", desc: "Science of measurement." },
+    { name: "Metaethics", desc: "Nature of moral truth." }
+  ];
+
+  // ---- BUSINESS & MANAGEMENT SCIENCES ----
+  var BUSINESS_MGMT = [
+    { name: "Management Science", desc: "Quantitative decision-making." },
+    { name: "Operations Management", desc: "Production and service delivery." },
+    { name: "Supply Chain Science", desc: "Networks of production and distribution." },
+    { name: "Organizational Behavior", desc: "Human behavior in organizations." },
+    { name: "Organizational Psychology", desc: "Psychology in organizations." },
+    { name: "Strategic Management", desc: "Long-term organizational planning." },
+    { name: "Decision Science", desc: "Rational decision-making." },
+    { name: "Human Resource Science", desc: "Workforce management." },
+    { name: "Corporate Finance", desc: "Financial decisions of firms." },
+    { name: "Investment Science", desc: "Portfolio and asset management." },
+    { name: "Behavioral Finance", desc: "Psychology in financial markets." },
+    { name: "Actuarial Science", desc: "Risk in insurance and pensions." },
+    { name: "Fintech & Financial Data Science", desc: "Digital transformation of finance." },
+    { name: "Financial Accounting", desc: "External financial reporting." },
+    { name: "Managerial Accounting", desc: "Internal financial information." },
+    { name: "Auditing Science", desc: "Verification and assurance." },
+    { name: "Tax Science", desc: "Taxation systems and economics." },
+    { name: "Consumer Behavior", desc: "How people purchase and use products." },
+    { name: "Market Research", desc: "Gathering data about markets." },
+    { name: "Brand Science", desc: "Building and managing brands." },
+    { name: "Marketing Science", desc: "Quantitative approaches to marketing." },
+    { name: "Business Analytics", desc: "Data analysis for business." },
+    { name: "Business Informatics", desc: "Information technology in business." },
+    { name: "Knowledge Management", desc: "Organizational knowledge and learning." },
+    { name: "Enterprise Systems", desc: "Large-scale business software." },
+    { name: "Entrepreneurship Science", desc: "Creation of new ventures." },
+    { name: "Innovation Management", desc: "Development of new ideas." },
+    { name: "Public Administration Science", desc: "Management of government." },
+    { name: "Nonprofit Management", desc: "Management of organizations without profits." }
+  ];
+
+  // Combine all data
+  var DATA = {
+    name: "Science",
+    desc: "The systematic pursuit of reliable knowledge about the universe, life, society, and formal structures of thought.",
+    children: [
+      {
+        name: "Natural Sciences",
+        accent: "natural",
+        desc: "Sciences studying matter, energy, life, Earth, and space through observation and experiment.",
+        children: [
+          {
+            name: "Physical Sciences",
+            desc: "Matter, energy, and fundamental forces.",
+            children: [
+              {
+                name: "Physics",
+                desc: "Laws governing matter and energy.",
+                children: PHYSICS
+              },
+              {
+                name: "Chemistry",
+                desc: "Composition and transformations of matter.",
+                children: CHEMISTRY
+              }
+            ]
+          },
+          {
+            name: "Earth & Environmental Sciences",
+            desc: "The solid Earth, atmosphere, oceans, and life.",
+            children: [
+              {
+                name: "Geology",
+                desc: "Rocks, minerals, and Earth structure.",
+                children: GEOLOGY
+              },
+              {
+                name: "Geophysics",
+                desc: "Physical methods applied to Earth.",
+                children: GEOPHYSICS
+              },
+              {
+                name: "Atmospheric & Ocean Sciences",
+                desc: "Atmosphere and oceans.",
+                children: ATMOS_OCEAN
+              },
+              {
+                name: "Environmental Science",
+                desc: "Environment and human impacts.",
+                children: [
+                  { name: "Environmental Toxicology", desc: "Pollutants in environment." },
+                  { name: "Environmental Monitoring", desc: "Measurement of environmental state." },
+                  { name: "Pollution Science", desc: "Sources and effects of pollution." },
+                  { name: "Sustainability Science", desc: "Long-term sustainability." },
+                  { name: "Environmental Impact Assessment", desc: "Evaluation of environmental effects." }
+                ]
+              }
+            ]
+          },
+          {
+            name: "Space Sciences",
+            desc: "Celestial objects and the universe.",
+            children: [
+              {
+                name: "Astronomy & Astrophysics",
+                desc: "Study of stars, galaxies, and cosmos.",
+                children: ASTRONOMY
+              }
+            ]
+          },
+          {
+            name: "Life Sciences (Biology)",
+            desc: "Living organisms and biological systems.",
+            children: [
+              {
+                name: "Core Biology",
+                desc: "Fundamental biological disciplines.",
+                children: LIFE_SCIENCES_CORE
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Formal Sciences",
+        accent: "formal",
+        desc: "Disciplines based on axioms, definitions, and logical proof.",
+        children: [
+          {
+            name: "Mathematics",
+            desc: "Numbers, structures, and patterns.",
+            children: MATHEMATICS
+          },
+          {
+            name: "Logic",
+            desc: "Structure of valid reasoning.",
+            children: LOGIC_FORMAL
+          },
+          {
+            name: "Computer Science",
+            desc: "Computation and algorithms.",
+            children: COMPUTER_SCIENCE
+          },
+          {
+            name: "Systems Science",
+            desc: "Complex systems and their dynamics.",
+            children: SYSTEMS_SCIENCE
+          },
+          {
+            name: "Philosophy",
+            desc: "Fundamental questions about knowledge and reality.",
+            children: PHILOSOPHY_FORMAL
+          }
+        ]
+      },
+      {
+        name: "Social Sciences",
+        accent: "social",
+        desc: "Human behavior, societies, and institutions.",
+        children: [
+          {
+            name: "Psychology",
+            desc: "Mind and behavior.",
+            children: PSYCHOLOGY
+          },
+          {
+            name: "Sociology",
+            desc: "Societies and social life.",
+            children: SOCIOLOGY
+          },
+          {
+            name: "Anthropology",
+            desc: "Humans across time and place.",
+            children: ANTHROPOLOGY
+          },
+          {
+            name: "Economics",
+            desc: "Production and allocation of resources.",
+            children: ECONOMICS
+          },
+          {
+            name: "Political Science",
+            desc: "Government, power, and politics.",
+            children: POLITICAL_SCIENCE
+          },
+          {
+            name: "Linguistics",
+            desc: "Language and communication.",
+            children: LINGUISTICS
+          },
+          {
+            name: "Human Geography",
+            desc: "People and places.",
+            children: HUMAN_GEOGRAPHY
+          },
+          {
+            name: "Education & Pedagogy",
+            desc: "Learning and teaching.",
+            children: EDUCATION
+          },
+          {
+            name: "Communication Studies",
+            desc: "Messages, media, and information.",
+            children: COMMUNICATION
+          },
+          {
+            name: "Law & Legal Studies",
+            desc: "Rules and justice.",
+            children: LAW
+          },
+          {
+            name: "History",
+            desc: "Human past.",
+            children: HISTORY
+          },
+          {
+            name: "Public Administration",
+            desc: "Government management.",
+            children: [
+              { name: "Public Policy", desc: "Design and implementation of policy." },
+              { name: "Public Management", desc: "Administrative efficiency." },
+              { name: "Government Budgeting", desc: "Public financial management." },
+              { name: "Emergency Management", desc: "Disaster preparedness." }
+            ]
+          },
+          {
+            name: "Social Work",
+            desc: "Support for vulnerable populations.",
+            children: [
+              { name: "Clinical Social Work", desc: "Individual and family treatment." },
+              { name: "Community Social Work", desc: "Community development." },
+              { name: "Policy Practice", desc: "Advocacy and policy." }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Applied Sciences & Engineering",
+        accent: "applied",
+        desc: "Design, building, and practical solutions.",
+        children: [
+          {
+            name: "Engineering",
+            desc: "Design and construction.",
+            children: ENGINEERING
+          },
+          {
+            name: "Architecture",
+            desc: "Building and space design.",
+            children: ARCHITECTURE
+          },
+          {
+            name: "Agricultural Sciences",
+            desc: "Food and fiber production.",
+            children: AGRICULTURE
+          },
+          {
+            name: "Energy Science & Technology",
+            desc: "Energy production and use.",
+            children: ENERGY
+          },
+          {
+            name: "Operations Research & Management Science",
+            desc: "Optimization methods.",
+            children: [
+              { name: "Linear Programming", desc: "Optimization with linear constraints." },
+              { name: "Nonlinear Optimization", desc: "Complex optimization problems." },
+              { name: "Stochastic Optimization", desc: "Optimization under uncertainty." },
+              { name: "Inventory Management", desc: "Stock level optimization." }
+            ]
+          },
+          {
+            name: "Human Factors & Ergonomics",
+            desc: "Design for human use.",
+            children: [
+              { name: "Physical Ergonomics", desc: "Body biomechanics." },
+              { name: "Cognitive Ergonomics", desc: "Mental workload design." },
+              { name: "Organizational Ergonomics", desc: "System design." },
+              { name: "Usability Engineering", desc: "User interface design." }
+            ]
+          },
+          {
+            name: "Metrology",
+            desc: "Science of measurement.",
+            children: [
+              { name: "Dimensional Metrology", desc: "Measurement of dimensions." },
+              { name: "Optical Metrology", desc: "Measurement using light." },
+              { name: "Thermal Metrology", desc: "Temperature measurement." },
+              { name: "Electrical Metrology", desc: "Electrical measurement." }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Health & Medical Sciences",
+        accent: "health",
+        desc: "Health, disease, and medical practice.",
+        children: [
+          {
+            name: "Medicine",
+            desc: "Diagnosis and treatment of disease.",
+            children: MEDICINE_SPECIALIZED
+          },
+          {
+            name: "Health Sciences",
+            desc: "Health and related fields.",
+            children: HEALTH_SCIENCES
+          }
+        ]
+      },
+      {
+        name: "Interdisciplinary & Emerging Sciences",
+        accent: "inter",
+        desc: "Fields at discipline intersections.",
+        children: INTERDISCIPLINARY
+      },
+      {
+        name: "Business & Management Sciences",
+        accent: "business",
+        desc: "Enterprise and organizational science.",
+        children: BUSINESS_MGMT
+      }
+    ]
+  };
+
+  /* ======================================================
+     RENDERING & COUNTING
+  ====================================================== */
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function rowInner(code, name, desc, hasChildren){
+    var toggle = hasChildren
+      ? '<span class="node-toggle" aria-hidden="true"></span>'
+      : '<span class="node-bullet" aria-hidden="true"></span>';
+    var descHtml = desc ? '<span class="node-desc">' + esc(desc) + '</span>' : '';
+    return toggle +
+      '<span class="node-main">' +
+        '<span class="node-heading"><span class="node-code">' + code + '</span><span class="node-name">' + esc(name) + '</span></span>' +
+        descHtml +
+      '</span>';
+  }
+
+  function renderNode(node, depth, path){
+    var hasChildren = Array.isArray(node.children) && node.children.length > 0;
+    var code = path.join('.');
+    var nameAttr = esc(node.name);
+    var descAttr = esc(node.desc || '');
+
+    if(hasChildren){
+      var openAttr = depth < 2 ? ' open' : '';
+      var inner = node.children.map(function(child, i){
+        return renderNode(child, depth + 1, path.concat(i + 1));
+      }).join('');
+      return '<details class="node depth-' + depth + ' has-children"' + openAttr +
+        ' data-name="' + nameAttr + '" data-desc="' + descAttr + '">' +
+        '<summary class="node-row">' + rowInner(code, node.name, node.desc, true) + '</summary>' +
+        '<div class="children">' + inner + '</div>' +
+        '</details>';
+    } else {
+      return '<div class="node depth-' + depth + ' leaf" data-name="' + nameAttr + '" data-desc="' + descAttr + '">' +
+        '<div class="node-row">' + rowInner(code, node.name, node.desc, false) + '</div>' +
+        '</div>';
+    }
+  }
+
+  function renderRoot(data){
+    return data.children.map(function(domain, i){
+      var code = String(i + 1);
+      var nameAttr = esc(domain.name);
+      var descAttr = esc(domain.desc || '');
+      var children = Array.isArray(domain.children) ? domain.children : [];
+      var inner = children.map(function(child, j){
+        return renderNode(child, 1, [i + 1, j + 1]);
+      }).join('');
+      return '<details class="node depth-0 has-children accent-' + domain.accent + '" open' +
+        ' data-name="' + nameAttr + '" data-desc="' + descAttr + '">' +
+        '<summary class="node-row">' + rowInner(code, domain.name, domain.desc, true) + '</summary>' +
+        '<div class="children">' + inner + '</div>' +
+        '</details>';
+    }).join('');
+  }
+
+  function countLeaves(node){
+    if(!Array.isArray(node.children) || node.children.length === 0){
+      return 1;
+    }
+    return node.children.reduce(function(sum, child){
+      return sum + countLeaves(child);
+    }, 0);
+  }
+
+  function countNodes(node){
+    if(!Array.isArray(node.children)) return 0;
+    return node.children.reduce(function(sum, c){
+      return sum + 1 + countNodes(c);
+    }, 0);
+  }
+
+  /* ======================================================
+     INIT
+  ====================================================== */
+  document.addEventListener('DOMContentLoaded', function(){
+    var treeEl = document.getElementById('tree');
+    treeEl.innerHTML = renderRoot(DATA);
+
+    var leafCount = countLeaves(DATA);
+    var total = countNodes(DATA) + 1;
+    var domains = DATA.children.length;
+    var disciplines = DATA.children.reduce(function(sum, d){
+      return sum + (Array.isArray(d.children) ? d.children.length : 0);
+    }, 0);
+
+    document.getElementById('stat-leaves').textContent = leafCount;
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-domains').textContent = domains;
+    document.getElementById('stat-disciplines').textContent = disciplines;
+    document.getElementById('leaf-count').textContent = leafCount;
+
+    // Expand / collapse all
+    document.getElementById('expand-all').addEventListener('click', function(){
+      treeEl.querySelectorAll('details.node').forEach(function(d){ d.open = true; });
+    });
+    document.getElementById('collapse-all').addEventListener('click', function(){
+      treeEl.querySelectorAll('details.node').forEach(function(d){ d.open = false; });
+    });
+
+    // Search
+    var searchInput = document.getElementById('search');
+    var searchCount = document.getElementById('search-count');
+    var openBeforeSearch = null;
+
+    searchInput.addEventListener('input', function(){
+      var q = this.value.trim().toLowerCase();
+      var allNodes = treeEl.querySelectorAll('.node');
+
+      if(!q){
+        treeEl.classList.remove('searching');
+        allNodes.forEach(function(n){ n.classList.remove('no-match','match'); });
+        if(openBeforeSearch){
+          openBeforeSearch.forEach(function(state, d){ d.open = state; });
+          openBeforeSearch = null;
+        }
+        searchCount.textContent = '';
+        return;
+      }
+
+      if(!openBeforeSearch){
+        openBeforeSearch = new Map();
+        treeEl.querySelectorAll('details.node').forEach(function(d){
+          openBeforeSearch.set(d, d.open);
+        });
+      }
+
+      treeEl.classList.add('searching');
+      var matches = 0;
+      allNodes.forEach(function(n){
+        var name = (n.dataset.name || '').toLowerCase();
+        var desc = (n.dataset.desc || '').toLowerCase();
+        var isMatch = name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+        n.classList.toggle('match', isMatch);
+        if(isMatch) matches++;
+      });
+      allNodes.forEach(function(n){
+        var selfMatch = n.classList.contains('match');
+        var hasMatchingDescendant = !!n.querySelector('.node.match');
+        n.classList.toggle('no-match', !selfMatch && !hasMatchingDescendant);
+      });
+      searchCount.textContent = matches + (matches === 1 ? ' match' : ' matches');
+    });
+  });
+})();
+</script>
+</body>
+</html>
