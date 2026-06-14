@@ -26,6 +26,7 @@
     --accent-applied: #e0b15f;
     --accent-health:  #e08a73;
     --accent-inter:   #6fc2bd;
+    --accent-business:#c49be8;
 
     --font-display: 'Fraunces', serif;
     --font-body: 'IBM Plex Sans', sans-serif;
@@ -329,6 +330,7 @@
   .accent-applied{ --accent: var(--accent-applied); }
   .accent-health{  --accent: var(--accent-health); }
   .accent-inter{   --accent: var(--accent-inter); }
+  .accent-business{--accent: var(--accent-business); }
 
   /* ============ SEARCH MODE ============ */
   .tree.searching .node.no-match{ display:none !important; }
@@ -416,6 +418,7 @@
     <span class="legend-item applied"><span class="legend-dot"></span>Applied Sciences &amp; Engineering</span>
     <span class="legend-item health"><span class="legend-dot"></span>Health &amp; Medical Sciences</span>
     <span class="legend-item inter"><span class="legend-dot"></span>Interdisciplinary &amp; Emerging Sciences</span>
+    <span class="legend-item" style="--dot-color:var(--accent-business)"><span class="legend-dot" style="background:var(--accent-business)"></span>Business &amp; Management Sciences</span>
   </nav>
 
   <main class="tree" id="tree" aria-label="Tree of science"></main>
@@ -462,7 +465,22 @@
     { name: "Cryophysics", desc: "Studies the physical properties of matter at extremely low temperatures, where quantum effects dominate and phenomena like superconductivity emerge." },
     { name: "Geophysical Fluid Dynamics", desc: "Applies fluid mechanics to the large-scale motions of the Earth's atmosphere and oceans, accounting for the planet's rotation and stratification." },
     { name: "Photonics", desc: "Studies the generation, emission, transmission, modulation, and detection of light (photons) for use in communication, sensing, and computing." },
-    { name: "Spintronics", desc: "Exploits the quantum spin of electrons — in addition to their charge — to build faster, more efficient electronic devices." }
+    { name: "Spintronics", desc: "Exploits the quantum spin of electrons — in addition to their charge — to build faster, more efficient electronic devices." },
+    { name: "Tribology", desc: "Studies friction, lubrication, and wear between interacting surfaces in relative motion — from engine bearings to artificial joints to geological faults." },
+    { name: "Rheology", desc: "Studies the flow and deformation of matter — especially complex fluids and soft solids like polymers, gels, blood, and lava — under applied forces." },
+    { name: "Biophotonics", desc: "Uses light to probe, image, and manipulate biological systems, spanning laser surgery, fluorescence microscopy, and optical coherence tomography." },
+    { name: "Econophysics", desc: "Applies statistical mechanics and other physics methods to model and understand financial markets, wealth distributions, and economic dynamics." },
+    { name: "String Theory & M-Theory", desc: "A theoretical framework proposing that the fundamental constituents of nature are one-dimensional vibrating strings and higher-dimensional membranes, aiming to unify all forces including gravity." },
+    { name: "Loop Quantum Gravity", desc: "A competing approach to quantum gravity that quantizes the geometry of spacetime itself into discrete loops, seeking to reconcile general relativity with quantum mechanics without requiring extra dimensions." },
+    { name: "Quantum Chromodynamics (QCD)", desc: "The theory of the strong nuclear force, describing how quarks and gluons interact inside protons, neutrons, and other hadrons via the exchange of color charge." },
+    { name: "High Energy Physics", desc: "The experimental study of the fundamental particles and forces of nature, conducted at particle accelerators capable of producing enormous collision energies." },
+    { name: "Astroparticle Physics", desc: "Studies cosmic rays, dark matter candidates, neutrinos, and gamma rays from cosmic sources, sitting at the intersection of particle physics and astrophysics." },
+    { name: "Quantum Optics", desc: "Studies the quantum nature of light and its interaction with matter — including laser physics, photon statistics, entangled photons, and optical implementations of quantum information." },
+    { name: "Quantum Information Science", desc: "Studies how quantum mechanical phenomena can be used to encode, transmit, and process information in fundamentally new ways, including quantum cryptography and quantum computing." },
+    { name: "Medical Physics", desc: "Applies physics principles and methods to medicine — including radiation therapy for cancer, medical imaging (MRI, CT, PET), and radiation safety." },
+    { name: "Statistical Physics", desc: "Connects the microscopic behavior of vast numbers of particles to macroscopic observables using probability and statistical methods, extending beyond thermodynamics to phase transitions and complex systems." },
+    { name: "Gravitational Physics", desc: "Studies gravity as described by general relativity — black holes, gravitational waves, spacetime geometry, and the search for a quantum theory of gravity." },
+    { name: "Nuclear Astrophysics", desc: "Studies the nuclear reactions that power stars and supernovae and that are responsible for the synthesis of chemical elements throughout the universe." }
   ];
   var CHEMISTRY_CHILDREN = [
     { name: "Organic Chemistry", desc: "Studies carbon-containing compounds, especially those found in living things, fuels, plastics, dyes, and pharmaceuticals." },
@@ -484,7 +502,17 @@
     { name: "Green Chemistry", desc: "Designs chemical products and processes that reduce or eliminate hazardous substances, minimizing waste and environmental harm at the molecular level." },
     { name: "Thermochemistry", desc: "Measures and predicts the heat released or absorbed by chemical reactions and phase changes." },
     { name: "Spectroscopy", desc: "Studies the interaction between matter and electromagnetic radiation across wavelengths to determine the composition, structure, and properties of substances." },
-    { name: "Cheminformatics", desc: "Applies informatics tools — databases, machine learning, and visualization — to chemical data, particularly in drug discovery and materials research." }
+    { name: "Cheminformatics", desc: "Applies informatics tools — databases, machine learning, and visualization — to chemical data, particularly in drug discovery and materials research." },
+    { name: "Quantum Chemistry", desc: "Applies quantum mechanics directly to chemical problems — computing molecular orbitals, reaction pathways, and spectroscopic properties from first principles." },
+    { name: "Materials Chemistry", desc: "Designs and synthesizes new materials — from ceramics and alloys to organic semiconductors and biomaterials — with targeted physical and chemical properties." },
+    { name: "Food Chemistry", desc: "Studies the chemical processes and interactions of all biological and non-biological components of foods — flavor, color, nutrition, and preservation." },
+    { name: "Organometallic Chemistry", desc: "Studies compounds containing bonds between metal atoms and carbon — a vast field underlying catalysis, industrial synthesis, and many biological processes." },
+    { name: "Stereochemistry", desc: "Studies how the three-dimensional arrangement of atoms in a molecule affects its properties and reactions — critical to drug design and materials science." },
+    { name: "Crystallography", desc: "Studies the arrangement of atoms in crystals using X-ray, neutron, and electron diffraction, revealing the three-dimensional structures of molecules from simple salts to proteins." },
+    { name: "Colloid & Surface Chemistry", desc: "Studies systems where one substance is dispersed at nanoscale or microscale through another — emulsions, foams, gels, and colloidal solutions — and the chemistry of interfaces." },
+    { name: "Industrial Chemistry", desc: "Applies chemical knowledge at commercial scale — developing and optimizing synthesis routes, catalysts, and processes for the manufacture of chemicals, fuels, and materials." },
+    { name: "Chemical Biology", desc: "Uses chemical tools — small molecules, probes, and unnatural building blocks — to interrogate and manipulate biological systems at the molecular level." },
+    { name: "Agrochemistry", desc: "Applies chemistry to agricultural problems — developing fertilizers, pesticides, herbicides, and soil amendments to increase crop yield and protect plants from pests." }
   ];
   var GEOLOGY_CHILDREN = [
     { name: "Mineralogy", desc: "Studies the chemistry, crystal structure, and physical properties of the minerals that make up rocks and the Earth's crust." },
@@ -503,7 +531,15 @@
     { name: "Engineering Geology", desc: "Applies geological knowledge to civil and environmental engineering problems, assessing site conditions for dams, tunnels, and foundations." },
     { name: "Geomicrobiology", desc: "Studies the role of microorganisms in geological processes, from the formation of minerals to the cycling of elements through the Earth's crust." },
     { name: "Economic Geology", desc: "Focuses on the formation and distribution of mineral resources — metal ores, fossil fuels, and industrial minerals — of commercial value." },
-    { name: "Quaternary Science", desc: "Studies the most recent geological period (the last ~2.6 million years), including ice ages, climate shifts, and the rise of modern humans." }
+    { name: "Quaternary Science", desc: "Studies the most recent geological period (the last ~2.6 million years), including ice ages, climate shifts, and the rise of modern humans." },
+    { name: "Astrogeology", desc: "Studies the geology of planets, moons, asteroids, and other solid bodies beyond Earth, using spacecraft data and meteorite analysis." },
+    { name: "Planetary Geology", desc: "Maps and interprets the surface features, volcanic, tectonic, and erosional processes of other planets and moons in the solar system." },
+    { name: "Taphonomy", desc: "Studies how organisms decay and become fossilized after death, informing how we interpret fossil record bias and ancient ecosystems." },
+    { name: "Coastal & Marine Geology", desc: "Studies the geology of shorelines, continental shelves, and the deep-sea floor, including sediment transport, sea-level change, and ocean-floor spreading." },
+    { name: "Stratigraphy", desc: "Studies the order, position, and age of rock layers (strata), providing the framework for reconstructing Earth's geological and biological history through deep time." },
+    { name: "Biostratigraphy", desc: "Uses the fossil record to correlate and date rock layers — key index fossils mark specific intervals of time across widely separated locations." },
+    { name: "Paleogeography", desc: "Reconstructs how the positions of continents, oceans, and mountain ranges have changed over geological time due to plate tectonics and sea-level change." },
+    { name: "Geomorphometry", desc: "Quantifies and analyzes landforms using mathematical and statistical methods — measuring slope, curvature, drainage networks, and terrain texture from digital elevation models." }
   ];
   var ATMOS_OCEAN_CHILDREN = [
     { name: "Meteorology", desc: "Studies short-term atmospheric conditions and the physical processes behind them, forming the basis of weather forecasting." },
@@ -518,7 +554,13 @@
     { name: "Physical Oceanography", desc: "Studies ocean currents, waves, tides, and the thermodynamic properties of seawater and their role in Earth's heat and climate system." },
     { name: "Chemical Oceanography", desc: "Studies the chemical composition of the ocean and the processes that control it, including carbon cycling and ocean acidification." },
     { name: "Ecohydrology", desc: "Studies the interaction between water cycles and ecosystems, including how plants regulate water fluxes and how hydrology shapes biological communities." },
-    { name: "Dendroclimatology", desc: "Reconstructs past climate conditions by analyzing the widths and densities of annual tree rings, which respond to temperature and rainfall." }
+    { name: "Dendroclimatology", desc: "Reconstructs past climate conditions by analyzing the widths and densities of annual tree rings, which respond to temperature and rainfall." },
+    { name: "Aeronomy", desc: "Studies the upper atmosphere — the stratosphere, mesosphere, and ionosphere — including their chemistry, dynamics, and how they interact with solar radiation and cosmic particles." },
+    { name: "Biological Oceanography", desc: "Studies the marine organisms that inhabit the ocean — their ecology, productivity, nutrient cycling, and responses to physical and chemical conditions." },
+    { name: "Synoptic Meteorology", desc: "Studies large-scale weather patterns — fronts, pressure systems, and cyclones — as observed simultaneously across a wide geographic area." },
+    { name: "Cryosphere Science", desc: "Studies all frozen water on Earth — sea ice, permafrost, ice sheets, snow cover, and glaciers — and their role in the climate system and sea-level change." },
+    { name: "Marine Meteorology", desc: "Studies atmospheric conditions and weather over the oceans, critical for maritime navigation, offshore operations, and understanding ocean-atmosphere coupling." },
+    { name: "Tropical Meteorology", desc: "Studies the atmospheric dynamics of tropical regions — monsoons, trade winds, tropical cyclones, and the Intertropical Convergence Zone." }
   ];
   var GEOPHYSICS_CHILDREN = [
     { name: "Geodesy", desc: "Precisely measures the size, shape, and gravitational field of the Earth, and monitors how these change over time due to tectonics and climate." },
@@ -542,7 +584,14 @@
     { name: "Gravitational Wave Astronomy", desc: "Detects and analyzes ripples in spacetime caused by cataclysmic cosmic events such as merging black holes and neutron stars." },
     { name: "Solar Physics", desc: "Studies the Sun — its interior structure, magnetic activity, sunspot cycles, solar wind, and the effects of solar events on Earth." },
     { name: "Space Physics", desc: "Studies the plasma, magnetic fields, radiation, and energetic particles that fill interplanetary and interstellar space, including the magnetospheres of planets." },
-    { name: "Infrared & Submillimetre Astronomy", desc: "Observes the universe in infrared and submillimetre wavelengths, revealing cool objects such as dust clouds, protostars, and the most distant galaxies." }
+    { name: "Infrared & Submillimetre Astronomy", desc: "Observes the universe in infrared and submillimetre wavelengths, revealing cool objects such as dust clouds, protostars, and the most distant galaxies." },
+    { name: "Neutrino Astronomy", desc: "Detects neutrinos from cosmic sources — supernovae, the Sun, and active galactic nuclei — using large underground or underwater detectors." },
+    { name: "Multi-Messenger Astronomy", desc: "Combines data from gravitational waves, electromagnetic radiation, neutrinos, and cosmic rays to study the same astrophysical events, yielding far richer information than any single messenger alone." },
+    { name: "Computational Astrophysics", desc: "Uses numerical simulation and high-performance computing to model complex astrophysical systems — from stellar interiors to the large-scale structure of the universe." },
+    { name: "Dark Matter & Dark Energy Research", desc: "Investigates the nature of the invisible mass that holds galaxies together (dark matter) and the mysterious force driving the accelerating expansion of the universe (dark energy)." },
+    { name: "Astroparticle Physics", desc: "Studies cosmic rays, gamma rays, and other high-energy particles from cosmic sources, probing fundamental physics at energies unreachable by Earth-based accelerators." },
+    { name: "Interstellar Medium Studies", desc: "Studies the gas, dust, and radiation that fills the space between stars — its composition, density, magnetic fields, and role in star formation." },
+    { name: "Time-Domain Astronomy", desc: "Studies astrophysical phenomena that change over time — supernovae, variable stars, gamma-ray bursts, and transient events — using repeated sky surveys." }
   ];
   var LIFE_SCIENCES_CHILDREN = [
     { name: "Botany", desc: "Studies plants — their structure, growth, classification, and ecological roles, from algae and mosses to flowering trees." },
@@ -597,7 +646,38 @@
     { name: "Chemical Ecology", desc: "Studies how chemical signals — from pheromones to toxins to attractants — mediate the interactions among organisms and between organisms and their environments." },
     { name: "Behavioral Ecology", desc: "Studies the adaptive significance of animal behavior, asking how natural selection shapes what organisms do in their ecological context." },
     { name: "Mathematical Biology", desc: "Applies mathematical models and analysis to biological problems, from epidemiology and population dynamics to neural networks and pattern formation." },
-    { name: "Sociobiology", desc: "Applies evolutionary theory to the study of social behavior in animals, asking how cooperation, altruism, and conflict can be explained by natural selection." }
+    { name: "Sociobiology", desc: "Applies evolutionary theory to the study of social behavior in animals, asking how cooperation, altruism, and conflict can be explained by natural selection." },
+    { name: "Dendrology", desc: "Studies woody plants — trees, shrubs, and lianas — their identification, ecology, and distribution in forests and other terrestrial ecosystems." },
+    { name: "Phenology", desc: "Studies cyclic and seasonal phenomena in living organisms — the timing of flowering, migration, and hibernation — and how these are shifting with climate change." },
+    { name: "Geobiology", desc: "Studies the interactions between the biosphere and the geosphere: how life shapes rocks, soils, and the atmosphere, and how geology shapes the evolution of life." },
+    { name: "Biomechanics", desc: "Applies the principles of mechanics to the structure and function of living organisms — from how muscles generate force to how bones resist fracture." },
+    { name: "Palynology", desc: "Studies pollen and spores — their morphology, dispersal, and fossil record — used to reconstruct past vegetation, climate, and archaeological contexts." },
+    { name: "Carcinology", desc: "Studies crustaceans — crabs, lobsters, shrimp, and their relatives — including their taxonomy, ecology, and physiology." },
+    { name: "Lepidopterology", desc: "Studies butterflies and moths — their taxonomy, life cycles, ecology, and their roles as pollinators and ecological indicators." },
+    { name: "Acarology", desc: "Studies mites and ticks — the most diverse group of arachnids — including their taxonomy, ecology, and medical and agricultural importance." },
+    { name: "Limnobiology", desc: "Studies the biology of freshwater ecosystems — lakes, rivers, ponds, and wetlands — including their flora, fauna, and ecological processes." },
+    { name: "Trophic Ecology", desc: "Studies feeding relationships and energy flow through food webs, examining how nutrients and energy move from producers through consumers across ecosystems." },
+    { name: "Connectomics", desc: "Maps the complete wiring diagrams of nervous systems — every neuron and synapse — to understand how neural circuits produce behavior and computation." },
+    { name: "Evolutionary Developmental Biology (Evo-Devo)", desc: "Studies how changes in developmental programs over evolutionary time produce the diversity of animal body plans, asking how genes that control development evolve." },
+    { name: "Molecular Ecology", desc: "Uses molecular techniques — DNA sequencing, genomics, stable isotopes — to study ecological questions about populations, species interactions, and biodiversity." },
+    { name: "Landscape Ecology", desc: "Studies the structure, function, and change of ecological systems at landscape scales, focusing on how spatial patterns of habitat affect biodiversity and ecosystem processes." },
+    { name: "Restoration Ecology", desc: "Develops the scientific basis for restoring degraded, damaged, or destroyed ecosystems to a functional and self-sustaining state." },
+    { name: "Ecosystem Ecology", desc: "Studies ecosystems as integrated systems of organisms and their abiotic environment, focusing on energy flow, nutrient cycling, and feedbacks that regulate productivity." },
+    { name: "Community Ecology", desc: "Studies how multiple species coexist, interact, and assemble into ecological communities, addressing competition, predation, mutualism, and diversity patterns." },
+    { name: "Applied Ecology", desc: "Applies ecological science to real-world conservation, natural resource management, and environmental policy challenges." },
+    { name: "Lichenology", desc: "Studies lichens — the symbiotic organisms formed between fungi and photosynthetic partners — their ecology, taxonomy, biogeography, and use as pollution indicators." },
+    { name: "Bryology", desc: "Studies mosses, liverworts, and hornworts — the non-vascular land plants — their taxonomy, ecology, and evolutionary significance as early land colonizers." },
+    { name: "Photobiology", desc: "Studies how light — visible, UV, and infrared — affects living organisms, including photosynthesis, photoperiodism, circadian rhythms, and DNA damage by UV radiation." },
+    { name: "Extremophile Biology", desc: "Studies organisms that thrive in extreme conditions — high temperature, pressure, acidity, salinity, or radiation — revealing the outer limits of life and possibilities for life on other worlds." },
+    { name: "Soil Biology", desc: "Studies the living component of soil — bacteria, fungi, nematodes, earthworms, and other organisms — and how they decompose organic matter and regulate soil fertility." },
+    { name: "Neuroethology", desc: "Studies the neural mechanisms underlying natural animal behaviors — how brains of different species are specialized to produce the behaviors those animals need to survive." },
+    { name: "Symbiosis Research", desc: "Studies intimate, long-term interactions between different biological species — mutualism, commensalism, parasitism, and endosymbiosis — and their evolutionary consequences." },
+    { name: "Invasion Biology", desc: "Studies the introduction, establishment, spread, and ecological and economic impacts of non-native species, and the management strategies to control them." },
+    { name: "Macroecology", desc: "Examines large-scale patterns in ecology — the relationships between body size, abundance, geographic range, and species richness across continents and geological time." },
+    { name: "Aerobiology", desc: "Studies airborne biological particles — pollen, fungal spores, bacteria, and viruses — their dispersal, survival, and ecological and public health effects." },
+    { name: "Conservation Genetics", desc: "Applies genetic and genomic methods to conservation biology — monitoring population diversity, managing inbreeding, and detecting hybridization in threatened species." },
+    { name: "Plant Ecology", desc: "Studies the distribution, abundance, and interactions of plants in natural communities, and the abiotic and biotic factors that shape plant diversity and productivity." },
+    { name: "Comparative Physiology", desc: "Compares physiological mechanisms — respiration, thermoregulation, osmoregulation — across diverse animals to understand the evolution of function." }
   ];
 
   var NATURAL_CHILDREN = [
@@ -638,7 +718,14 @@
         },
         {
           name: "Environmental Science",
-          desc: "An interdisciplinary field combining biology, chemistry, geology, and policy to study the environment, ecosystems, and humanity's effects on them."
+          desc: "An interdisciplinary field combining biology, chemistry, geology, and policy to study the environment, ecosystems, and humanity's effects on them.",
+          children: [
+            { name: "Environmental Toxicology", desc: "Studies how pollutants and toxic substances affect organisms, ecosystems, and human health, assessing risks from exposure to contaminants in air, water, and soil." },
+            { name: "Environmental Monitoring", desc: "Develops methods and networks for measuring the state of the environment — air quality, water quality, soil contamination — and tracking change over time." },
+            { name: "Pollution Science", desc: "Studies the sources, pathways, effects, and remediation of chemical and physical pollutants in environmental systems." },
+            { name: "Sustainability Science", desc: "Studies the interactions between human and Earth systems to identify pathways toward long-term sustainability in energy, food, water, and climate." },
+            { name: "Environmental Impact Assessment", desc: "Develops scientific frameworks for evaluating the potential environmental consequences of proposed projects, plans, and policies before they are implemented." }
+          ]
         }
       ]
     },
@@ -823,7 +910,10 @@
     { name: "Cognitive Anthropology", desc: "Studies how human cognition is shaped by culture — how people in different societies categorize experience, reason, and conceptualize the world." },
     { name: "Forensic Anthropology", desc: "Applies biological anthropology — especially skeletal analysis — to legal contexts, aiding in the identification of human remains." },
     { name: "Ethnoarchaeology", desc: "Studies living societies to understand the material culture they produce, and uses those insights to interpret archaeological remains of past peoples." },
-    { name: "Paleoanthropology", desc: "Studies the fossil and archaeological record of human ancestors and relatives to trace the biological and behavioral evolution of the human lineage." }
+    { name: "Paleoanthropology", desc: "Studies the fossil and archaeological record of human ancestors and relatives to trace the biological and behavioral evolution of the human lineage." },
+    { name: "Anthrozoology", desc: "Studies the relationships between humans and other animals — domestication, pet-keeping, working animals, and the mutual impacts of cohabitation." },
+    { name: "Ethnobiology", desc: "Studies the relationships between human cultures and all organisms they interact with — plants, animals, and fungi — across indigenous and traditional societies." },
+    { name: "Applied Anthropology", desc: "Puts anthropological methods and findings to work in solving practical human problems — in health, development, policy, and community engagement." }
   ];
   var ECON_CHILDREN = [
     { name: "Microeconomics", desc: "Studies the decisions of individuals, households, and firms, and how those decisions interact in markets." },
@@ -839,7 +929,12 @@
     { name: "International Economics", desc: "Studies trade, capital flows, and exchange rates between nations, and the institutions and policies that govern economic relations across borders." },
     { name: "Monetary Economics", desc: "Studies money, banking, and credit — how central banks control the money supply, how interest rates affect the economy, and how financial crises unfold." },
     { name: "Public Finance", desc: "Studies how governments raise revenue (taxes) and spend it, and the economic effects of public budgets and fiscal policy." },
-    { name: "History of Economic Thought", desc: "Traces the development of economic ideas from ancient times through mercantilism, classical economics, Keynesianism, and contemporary schools." }
+    { name: "History of Economic Thought", desc: "Traces the development of economic ideas from ancient times through mercantilism, classical economics, Keynesianism, and contemporary schools." },
+    { name: "Neuroeconomics", desc: "Uses neuroscience methods to study how the brain evaluates options and makes economic decisions, bridging biology, psychology, and economics." },
+    { name: "Ecological Economics", desc: "Studies the relationship between human economies and natural ecosystems, treating the economy as embedded within — not separate from — the biosphere." },
+    { name: "Institutional Economics", desc: "Studies how institutions — laws, norms, organizations, and rules — shape economic behavior and outcomes, emphasizing that markets are social constructs." },
+    { name: "Computational Economics", desc: "Uses computer simulations, agent-based models, and machine learning to analyze complex economic systems and generate economic predictions." },
+    { name: "Political Economy", desc: "Studies the interplay between political forces and economic systems — how governments shape markets and how economic power influences politics." }
   ];
   var POLISCI_CHILDREN = [
     { name: "Comparative Politics", desc: "Studies and compares political systems, institutions, and processes across different countries and regions." },
@@ -865,7 +960,10 @@
     { name: "Forensic Linguistics", desc: "Applies linguistic analysis to legal questions — authorship attribution, language of contracts, and the analysis of threatening or criminal communications." },
     { name: "Dialectology", desc: "Studies the regional and social varieties (dialects) of a language — their systematic differences, distribution, and change over time." },
     { name: "Etymology", desc: "Traces the origins and historical development of individual words, revealing borrowings, sound changes, and semantic shifts across centuries." },
-    { name: "Applied Linguistics", desc: "Applies linguistic research to real-world problems — language teaching and learning, translation, literacy, and language policy." }
+    { name: "Applied Linguistics", desc: "Applies linguistic research to real-world problems — language teaching and learning, translation, literacy, and language policy." },
+    { name: "Semiotics", desc: "Studies signs and symbols — how they convey meaning across language, gesture, image, and culture — drawing on linguistics, philosophy, and anthropology." },
+    { name: "Philology", desc: "Studies historical written texts and their languages, reconstructing how documents were composed, transmitted, and understood across time." },
+    { name: "Lexicology & Lexicography", desc: "Studies the vocabulary of a language — its structure, meaning, and history (lexicology) — and the craft of compiling dictionaries (lexicography)." }
   ];
   var HUMAN_GEO_CHILDREN = [
     { name: "Cartography", desc: "The art and science of designing and creating maps to represent geographic information clearly and accurately." },
@@ -901,6 +999,17 @@
     { name: "Environmental Law", desc: "Studies the legal systems and instruments for regulating human activities that affect the natural environment." },
     { name: "Comparative Law", desc: "Compares the legal systems, rules, and traditions of different countries and cultures, identifying patterns and differences." },
     { name: "Criminology & Law", desc: "The sociolegal study of crime, punishment, and the criminal justice system from both legal and social-scientific perspectives." }
+  ];
+
+  var HISTORY_CHILDREN = [
+    { name: "Ancient History", desc: "Studies civilizations of the ancient world — Mesopotamia, Egypt, Greece, Rome, China, and others — through written records and material remains." },
+    { name: "Medieval History", desc: "Examines the societies, cultures, religions, and politics of Europe, the Middle East, and beyond from the fall of Rome to the Renaissance." },
+    { name: "Modern History", desc: "Studies the period from roughly the 15th century to the present — empires, revolutions, industrialization, and globalization." },
+    { name: "Social History", desc: "Studies ordinary people's lived experience — work, family, sexuality, community, and daily life — rather than kings and diplomats." },
+    { name: "Economic History", desc: "Examines how economies have developed, changed, and interacted over time, from ancient trade routes to modern industrial revolutions." },
+    { name: "Intellectual History", desc: "Studies the history of ideas — how concepts, theories, and worldviews emerged, spread, and changed across time and cultures." },
+    { name: "Environmental History", desc: "Studies the relationships between human societies and the natural world across time, examining how environments shaped people and how people transformed environments." },
+    { name: "World History & Historiography", desc: "Examines history at a global scale, tracing connections, comparisons, and exchanges across civilizations, and reflects on the methods historians use to write the past." }
   ];
 
   var SOCIAL_CHILDREN = [
@@ -953,6 +1062,19 @@
       name: "Law & Legal Studies",
       desc: "The study of rules, norms, and institutions that govern human conduct — from constitutional foundations to criminal procedure — and the philosophical questions they raise.",
       children: LAW_CHILDREN
+    },
+    {
+      name: "History",
+      desc: "The systematic study of the human past — its events, causes, social structures, ideas, and cultures — using written records, material remains, and critical method.",
+      children: HISTORY_CHILDREN
+    },
+    {
+      name: "Public Administration",
+      desc: "Studies the organization, management, and performance of government agencies and public-sector organizations, and the policies they implement."
+    },
+    {
+      name: "Social Work",
+      desc: "Applies social science knowledge and professional practice to support individuals, families, and communities facing poverty, trauma, disability, and social exclusion."
     }
   ];
 
@@ -1109,6 +1231,13 @@
     { name: "Surgery", desc: "A branch of medicine that treats injuries, diseases, and disorders through operative procedures." },
     { name: "Clinical Pharmacology", desc: "Bridges pharmacology and medicine, studying how drugs behave in real patients — their safety, dosing, and interactions in clinical settings." },
     { name: "Immunology (Clinical)", desc: "Diagnoses and treats diseases of the immune system — allergies, autoimmune conditions, immune deficiencies, and hypersensitivity reactions." },
+    { name: "Regenerative Medicine", desc: "Develops therapies to repair, replace, or regenerate damaged tissues and organs using stem cells, tissue engineering, and gene therapy." },
+    { name: "Precision Medicine", desc: "Tailors medical treatment to the individual characteristics of each patient — their genome, microbiome, lifestyle, and environment — rather than applying one-size-fits-all approaches." },
+    { name: "Translational Medicine", desc: "Bridges the gap between laboratory discoveries and clinical application, accelerating the development of new diagnostics and treatments from bench to bedside." },
+    { name: "Space Medicine", desc: "Studies the physiological and psychological effects of spaceflight on the human body, and develops countermeasures to keep astronauts healthy in microgravity and radiation environments." },
+    { name: "Nanomedicine", desc: "Uses nanotechnology — especially nanoparticles and molecular-scale devices — for targeted drug delivery, medical imaging, and treatment of disease." },
+    { name: "Trichology", desc: "Studies the hair and scalp — their structure, physiology, and disorders such as alopecia — and the treatments used to restore hair health." },
+    { name: "Thanatology", desc: "The interdisciplinary study of death, dying, and bereavement — examining its biological, psychological, social, and cultural dimensions." },
     {
       name: "Allied Health Sciences",
       desc: "A broad cluster of health professions — from physical therapy to medical genetics — that support, complement, or supplement the work of physicians.",
@@ -1178,7 +1307,82 @@
     { name: "Geoarchaeology", desc: "Studies archaeological sites and materials using geoscience techniques — stratigraphy, sedimentology, micromorphology — to reconstruct past landscapes and environments." },
     { name: "Digital Humanities", desc: "Applies computational and digital tools to humanistic inquiry — from text mining historical archives to 3D modeling ancient structures." },
     { name: "Origin of Life Research", desc: "Investigates how life arose from non-living chemistry on the early Earth, drawing on chemistry, geology, biology, and planetary science." },
-    { name: "Exobiology", desc: "Studies the possibility and nature of life beyond Earth, integrating astrobiology, planetary science, and biochemistry." }
+    { name: "Exobiology", desc: "Studies the possibility and nature of life beyond Earth, integrating astrobiology, planetary science, and biochemistry." },
+    { name: "Quantum Biology", desc: "Investigates whether quantum mechanical effects — such as tunneling, entanglement, and superposition — play functional roles in biological processes such as photosynthesis and bird navigation." },
+    { name: "Biomimetics", desc: "Studies biological systems and structures as models for designing new materials, devices, and processes — learning from evolution's four-billion-year engineering record." },
+    { name: "Neuroethics", desc: "Examines the ethical implications of advances in neuroscience — from brain imaging and enhancement to questions of personal identity, free will, and cognitive privacy." },
+    { name: "Neurolaw", desc: "Studies how neuroscientific findings about brain function, decision-making, and mental disorder should be incorporated into legal standards, evidence, and policy." },
+    { name: "Cliodynamics", desc: "An interdisciplinary field applying mathematical modeling, historical macrosociology, and quantitative analysis to study and predict large-scale historical dynamics." },
+    { name: "Scientometrics & Bibliometrics", desc: "Measures and analyzes scientific and scholarly output — publications, citations, collaborations — to understand how knowledge is produced, evaluated, and distributed." },
+    { name: "Paleoneurobiology", desc: "Studies brain evolution by analyzing endocasts of fossilized skulls, revealing how primate and human brains grew in size and complexity over millions of years." },
+    { name: "Sustainability Science", desc: "Studies the interactions between human and Earth systems to understand the conditions for long-term sustainability and develop pathways toward them." },
+    { name: "Xenobiology", desc: "Designs living systems using genetic codes, unnatural amino acids, or non-standard nucleotides not found in nature, exploring the boundaries of life itself." },
+    { name: "Astroecology", desc: "Studies the potential ecology of extraterrestrial environments — what ecosystems might exist on other worlds and how to look for them." },
+    { name: "Neurogenetics", desc: "Studies how genes and their variants shape the development, structure, and function of the nervous system, and their role in neurological and psychiatric disorders." },
+    { name: "Synthetic Genomics", desc: "Designs and constructs entire genomes from scratch, testing hypotheses about the minimal requirements for life and creating organisms with novel capabilities." },
+    { name: "Lipidomics", desc: "Studies the complete set of lipid molecules in a biological system, revealing their roles in signaling, membrane structure, and metabolic disease." },
+    { name: "Glycomics", desc: "Studies the full repertoire of sugars and sugar-containing molecules (glycans) in organisms, which regulate cell recognition, immunity, and pathogen binding." },
+    { name: "Single-Cell Biology", desc: "Analyzes the genomes, transcriptomes, and other properties of individual cells rather than bulk populations, revealing heterogeneity hidden by ensemble measurements." },
+    { name: "Cognitive Archaeology", desc: "Studies the evolution of human cognition through the archaeological record — inferring symbolic thought, planning, and social complexity from ancient artifacts and sites." },
+    { name: "Science Policy", desc: "Studies how scientific knowledge is used in policymaking and how government decisions shape the direction and funding of scientific research." },
+    { name: "Global Health Science", desc: "Studies the health of populations across national boundaries, addressing infectious disease, non-communicable conditions, and the social determinants of health equity worldwide." },
+    { name: "Futurology & Futures Studies", desc: "Systematically studies possible, probable, and preferable futures — using trend analysis, modeling, and scenario planning to anticipate change and guide long-term decisions." }
+  ];
+
+  var BUSINESS_CHILDREN = [
+    {
+      name: "Management Science",
+      desc: "Applies quantitative and scientific methods — optimization, statistics, modeling — to improve managerial decision-making in complex organizations.",
+      children: [
+        { name: "Operations Management", desc: "Studies how organizations design and control the processes of production and delivery of goods and services efficiently." },
+        { name: "Supply Chain Science", desc: "Studies the networks of suppliers, manufacturers, distributors, and retailers that bring products from raw materials to end consumers." },
+        { name: "Organizational Behavior", desc: "Studies how individuals and groups behave within organizations, drawing on psychology and sociology to improve leadership, teamwork, and workplace culture." },
+        { name: "Strategic Management", desc: "Studies how organizations set goals, allocate resources, and position themselves in competitive environments to achieve long-term success." },
+        { name: "Decision Science", desc: "Studies how to make rational decisions under uncertainty, combining probability theory, psychology, and operations research." },
+        { name: "Human Resource Science", desc: "Applies scientific methods to workforce management — recruitment, performance, retention, and organizational development." }
+      ]
+    },
+    {
+      name: "Finance & Financial Science",
+      desc: "Studies how individuals, firms, and governments allocate money and other assets over time under conditions of risk and uncertainty.",
+      children: [
+        { name: "Corporate Finance", desc: "Studies how firms raise capital, make investment decisions, manage risk, and maximize shareholder value." },
+        { name: "Investment Science", desc: "Applies mathematical modeling to portfolio construction, asset pricing, and the valuation of financial instruments." },
+        { name: "Behavioral Finance", desc: "Studies how psychological biases and emotions lead investors and markets to deviate from purely rational behavior." },
+        { name: "Actuarial Science", desc: "Applies probability, statistics, and financial mathematics to assess and manage risk in insurance, pensions, and financial planning." },
+        { name: "Fintech & Financial Data Science", desc: "Studies the application of digital technologies — AI, blockchain, cloud computing — to transform financial services and create new market structures." }
+      ]
+    },
+    {
+      name: "Accounting & Accountancy",
+      desc: "The measurement, processing, and communication of financial and non-financial information about economic entities to support decision-making and accountability.",
+      children: [
+        { name: "Financial Accounting", desc: "Studies the recording, summarizing, and reporting of financial transactions to external stakeholders through standardized financial statements." },
+        { name: "Managerial Accounting", desc: "Develops internal financial information and analyses to support management planning, control, and decision-making." },
+        { name: "Auditing Science", desc: "Studies the independent examination of financial accounts and processes to verify accuracy, compliance, and integrity." },
+        { name: "Tax Science", desc: "Studies the legal and economic frameworks of taxation — how taxes are designed, assessed, and influenced by individual and corporate behavior." }
+      ]
+    },
+    {
+      name: "Marketing Science",
+      desc: "Studies how organizations understand, create, communicate, and deliver value to customers and markets, combining consumer psychology with data analytics.",
+      children: [
+        { name: "Consumer Behavior", desc: "Studies how individuals and groups make decisions to acquire, use, and dispose of products and services, drawing on psychology and sociology." },
+        { name: "Market Research", desc: "Develops and applies quantitative and qualitative methods to gather data about consumers, competitors, and market conditions." },
+        { name: "Brand Science", desc: "Studies how brands are built, measured, and managed — the psychology of brand identity, equity, and loyalty." }
+      ]
+    },
+    {
+      name: "Information Systems",
+      desc: "Studies the design, implementation, and management of computer-based systems for storing, processing, and communicating information in organizations.",
+      children: [
+        { name: "Business Informatics", desc: "Studies the application of information and communication technology to business processes, combining computer science with management knowledge." },
+        { name: "Knowledge Management", desc: "Studies how organizations create, capture, distribute, and effectively use knowledge to gain competitive advantage." },
+        { name: "Enterprise Systems", desc: "Examines large-scale integrated software systems that coordinate data and processes across an entire organization." }
+      ]
+    },
+    { name: "Entrepreneurship & Innovation Science", desc: "Studies the processes of creating new ventures, bringing innovations to market, and the ecosystems — policy, finance, culture — that enable or impede them." },
+    { name: "Public Administration Science", desc: "Applies management and social science to how government agencies function — budgeting, personnel, organizational design, and program evaluation." }
   ];
 
   var DATA = {
@@ -1220,6 +1424,12 @@
         accent: "inter",
         desc: "Fields that sit between or across traditional disciplines, combining their tools and questions to study problems — from the workings of the mind to the behavior of complex systems — that no single science covers alone.",
         children: INTER_CHILDREN
+      },
+      {
+        name: "Business & Management Sciences",
+        accent: "business",
+        desc: "Disciplines that apply scientific and analytical methods to the creation, organization, financing, and management of commercial and public enterprises.",
+        children: BUSINESS_CHILDREN
       }
     ]
   };
